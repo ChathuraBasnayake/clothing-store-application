@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="490.0" prefWidth="747.0" style="-fx-background-color: #F8F8E1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.icet.clothify.controller.UserSignUpFormController">
+   <children>
+      <ImageView fitHeight="486.0" fitWidth="352.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/signup-form/img-2.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="449.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration Form" textAlignment="CENTER" wrappingWidth="248.74188232421875">
+         <font>
+            <Font name="Calibri Bold" size="31.0" />
+         </font>
+      </Text>
+      <JFXCheckBox fx:id="checkBoxAdmin" layoutX="435.0" layoutY="394.0" text="Admin" />
+      <JFXButton layoutX="466.0" layoutY="425.0" onAction="#btnCreateAccountOnAction" prefHeight="27.0" prefWidth="194.0" style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-radius: 25; -fx-background-color: #8ACCD5; -fx-background-radius: 25;" text="Create Account">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="txtEmail" focusColor="WHITE" layoutX="415.0" layoutY="271.0" prefHeight="32.0" prefWidth="307.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txtFirstName" focusColor="WHITE" layoutX="410.0" layoutY="162.0" prefHeight="32.0" prefWidth="142.0" promptText="First name" style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txtLastName" focusColor="WHITE" layoutX="562.0" layoutY="162.0" prefHeight="32.0" prefWidth="154.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txtCompany" focusColor="WHITE" layoutX="415.0" layoutY="213.0" prefHeight="32.0" prefWidth="142.0" promptText="Company" style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txtUserId" editable="false" focusColor="WHITE" layoutX="415.0" layoutY="107.0" prefHeight="32.0" prefWidth="142.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;" text="User ID" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txtPassword" focusColor="WHITE" layoutX="415.0" layoutY="326.0" prefHeight="32.0" prefWidth="142.0" promptText="First name" style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;" text="Password" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txtConfirmPassword" focusColor="WHITE" layoutX="574.0" layoutY="326.0" prefHeight="32.0" prefWidth="142.0" promptText="First name" style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;" text="Confirm Password" unFocusColor="WHITE" />
+   </children>
+</AnchorPane>

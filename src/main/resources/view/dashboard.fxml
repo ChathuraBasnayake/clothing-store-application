@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="200.0" prefHeight="600.0" prefWidth="711.0" style="-fx-background-color: #F3F5F9;">
+         <children>
+            <Pane prefHeight="48.0" prefWidth="711.0" style="-fx-background-color: #FCFEFF;">
+               <children>
+                  <JFXTextField fx:id="txtEmail" focusColor="WHITE" layoutX="14.0" layoutY="8.0" prefHeight="32.0" prefWidth="528.0" promptText="Search" style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;" unFocusColor="WHITE" />
+               </children>
+            </Pane>
+            <Pane layoutY="48.0" prefHeight="552.0" prefWidth="711.0" />
+         </children>
+      </Pane>
+      <Pane prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #FCFEFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 16, 0.3, 0, 6);">
+         <children>
+            <JFXButton layoutX="16.0" layoutY="69.0" prefHeight="39.0" prefWidth="172.0" style="-fx-background-color: #20B1D0;" text="DashBoard" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <Text layoutX="24.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clothify">
+               <font>
+                  <Font name="Calibri Bold" size="23.0" />
+               </font>
+            </Text>
+            <Text layoutX="102.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store">
+               <font>
+                  <Font name="System Italic" size="27.0" />
+               </font>
+            </Text>
+            <JFXButton layoutX="16.0" layoutY="128.0" prefHeight="39.0" prefWidth="172.0" style="-fx-background-color: #20B1D0;" text="Add Items" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children></Pane>
+     
+
+   </children>
+</AnchorPane>
