@@ -1,48 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Pane layoutX="200.0" prefHeight="600.0" prefWidth="711.0" style="-fx-background-color: #F3F5F9;">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1024.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30px;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.icet.clothify.controller.DashboardController">
+   <left>
+      <AnchorPane style="-fx-background-color: #ffffff; -fx-background-radius: 30px 30px 30px 30px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.5, 5, 0);" BorderPane.alignment="CENTER">
          <children>
-            <Pane prefHeight="48.0" prefWidth="711.0" style="-fx-background-color: #FCFEFF;">
+            <FontAwesomeIconView glyphName="BARS" layoutX="17.0" layoutY="25.0" size="1.5em" AnchorPane.leftAnchor="14.5" AnchorPane.rightAnchor="14.5" AnchorPane.topAnchor="15.0" />
+            <VBox layoutX="12.0" layoutY="198.0">
                <children>
-                  <JFXTextField fx:id="txtEmail" focusColor="WHITE" layoutX="14.0" layoutY="8.0" prefHeight="32.0" prefWidth="528.0" promptText="Search" style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;" unFocusColor="WHITE" />
-               </children>
-            </Pane>
-            <Pane layoutY="48.0" prefHeight="552.0" prefWidth="711.0" />
+                  <FontAwesomeIconView fill="#393fff" glyphName="HOME" selectionFill="#f3f3f3" size="1.5em" text="" wrappingWidth="33.51427173614502" />
+                  <FontAwesomeIconView fill="#b9b9b9" glyphName="USER_PLUS" layoutX="10.0" layoutY="25.0" onMouseClicked="#addUserOnClicked" selectionFill="#9c9696" size="1.5em" wrappingWidth="33.371416091918945">
+                     <VBox.margin>
+                        <Insets bottom="15.0" top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView fill="#b9b9b9" glyphName="GEAR" layoutX="10.0" layoutY="44.0" selectionFill="#9c9696" size="1.5em" wrappingWidth="23.428571701049805">
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <Separator />
+                  <FontAwesomeIconView glyphName="PLUS" layoutX="10.0" layoutY="83.0" onMouseClicked="#addItemOnclicked" size="1.5em" wrappingWidth="33.342899322509766">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+               </children></VBox>
+            <Circle fill="WHITE" layoutX="22.0" layoutY="556.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
-      </Pane>
-      <Pane prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #FCFEFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 16, 0.3, 0, 6);">
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton layoutX="16.0" layoutY="69.0" prefHeight="39.0" prefWidth="172.0" style="-fx-background-color: #20B1D0;" text="DashBoard" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="12.0" />
-               </font>
-            </JFXButton>
-            <Text layoutX="24.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clothify">
-               <font>
-                  <Font name="Calibri Bold" size="23.0" />
-               </font>
-            </Text>
-            <Text layoutX="102.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store">
-               <font>
-                  <Font name="System Italic" size="27.0" />
-               </font>
-            </Text>
-            <JFXButton layoutX="16.0" layoutY="128.0" prefHeight="39.0" prefWidth="172.0" style="-fx-background-color: #20B1D0;" text="Add Items" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font>
-            </JFXButton>
-         </children></Pane>
-     
-
-   </children>
-</AnchorPane>
+            <VBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="850.0" style="-fx-border-color: #FFF8F8; -fx-background-radius: 0px 0px 10px 10px; -fx-border-radius: 0px 0px 10px 10px; -fx-border-width: 5px;" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label text="DashBoard" textFill="#1b56fd">
+                           <padding>
+                              <Insets right="15.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Separator orientation="VERTICAL">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Separator>
+                        <Label layoutX="25.0" layoutY="20.0" text="Hello Mate, welcome back!">
+                           <padding>
+                              <Insets right="15.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="135.0" layoutY="20.0" prefHeight="20.0" prefWidth="543.0" text="2.03 May 29 2025">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <BorderPane layoutX="40.0" layoutY="72.0" prefHeight="493.0" prefWidth="897.0">
+               <top>
+                  <AnchorPane prefHeight="50.0" prefWidth="898.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label layoutX="23.0" layoutY="7.0" text="Clothify" textFill="#1b56fd">
+                           <font>
+                              <Font name="Calibri Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="383.0" layoutY="7.0">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <center>
+                  <Pane fx:id="ItemAddContent" prefHeight="214.0" prefWidth="898.0" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 5, 0); -fx-border-radius: 30px; -fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+                     <children>
+                        <Pane layoutX="413.0" layoutY="23.0" style="-fx-background-radius: 30px;" />
+                     </children>
+                  </Pane>
+               </center>
+            </BorderPane>
+         </children></AnchorPane>
+   </center>
+</BorderPane>

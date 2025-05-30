@@ -24,7 +24,7 @@ public class LoginFormController {
 
         try {
 
-            Parent root = FXMLLoader.load(getClass().getResource("/view/user_signup_form.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
 
