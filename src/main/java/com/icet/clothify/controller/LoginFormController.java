@@ -1,5 +1,8 @@
 package com.icet.clothify.controller;
 
+import com.icet.clothify.service.ServiceFactory;
+import com.icet.clothify.service.custom.UserService;
+import com.icet.clothify.util.ServiceType;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,35 +13,52 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginFormController {
 
+    UserService userService;
     @FXML
     private JFXTextField txtEmail;
-
     @FXML
     private JFXTextField txtPassword;
 
-    @FXML
-    void btnLoginOnAction(ActionEvent event) {
-
+    {
         try {
-
-            Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard.fxml"));
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-
-            // Close current window
-
-            ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
-
-            stage.setResizable(false);
-            stage.show();
-
-
-        } catch (IOException e) {
+            userService = ServiceFactory.getInstance().getServiceType(ServiceType.USER);
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    void btnLoginOnAction(ActionEvent event) throws SQLException {
+
+        if (userService.userLogIn(txtEmail.getText(), txtPassword.getText())) {
+
+
+            try {
+
+                Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard.fxml"));
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+
+                // Close current window
+
+                ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
+
+                stage.setResizable(false);
+                stage.show();
+
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+
+
+        }
+
 
     }
 

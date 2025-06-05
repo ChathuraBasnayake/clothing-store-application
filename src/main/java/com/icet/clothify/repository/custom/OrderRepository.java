@@ -1,4 +1,7 @@
 package com.icet.clothify.repository.custom;
 
-public interface OrderRepository {
+import com.icet.clothify.model.dao.OrderDAO;
+import com.icet.clothify.repository.CRUDRepository;
+
+public interface OrderRepository extends CRUDRepository<OrderDAO, String> {
 }

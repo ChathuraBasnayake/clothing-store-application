@@ -1,4 +1,4 @@
-package com.icet.clothify.model.dto;
+package com.icet.clothify.model.dao;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class UserDAO {
 
     private Integer id;
     private String name;

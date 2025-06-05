@@ -1,0 +1,130 @@
+/* General Styling for the entire application */
+.root {
+    -fx-font-family: "System"; /* Using a generic system font, adjust if you have a specific font like Inter */
+    -fx-font-size: 14px;
+    -fx-background-color: #f8f9fa; /* Ensure root background matches BorderPane */
+}
+
+/* Sidebar Button Styling */
+.sidebar-button {
+    -fx-background-color: transparent; /* No background by default */
+    -fx-background-radius: 10px; /* Slightly rounded corners */
+    -fx-padding: 10px; /* Padding inside the button */
+    -fx-cursor: hand; /* Change cursor to hand on hover */
+    -fx-transition: -fx-background-color 0.2s ease-in-out; /* Smooth transition for hover effects */
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #e3f2fd; /* Light blue background on hover */
+}
+
+/* Targeting FontAwesomeIconView directly within a sidebar-button */
+.sidebar-button .font-awesome-icon {
+    -fx-fill: #b9b9b9; /* Default icon color for inactive buttons */
+    -fx-transition: -fx-fill 0.2s ease-in-out; /* Smooth transition for icon color change */
+}
+
+/* Specific style for the active/selected sidebar button */
+/* This styleClass needs to be dynamically applied by your Java Controller */
+.sidebar-button.active {
+    -fx-background-color: #e3f2fd; /* Light blue background for active state */
+}
+
+/* Override icon color for the active sidebar button */
+.sidebar-button.active .font-awesome-icon {
+    -fx-fill: #1b56fd; /* Darker blue icon color for active state */
+}
+
+/* Styling for the graphic (FontAwesomeIconView) outside of buttons, e.g., in cards or header */
+.font-awesome-icon {
+    /* Ensure this rule is general enough but doesn't override button icons unintendedly */
+}
+
+
+/* Form Element Styling (Text Fields, Text Areas, ComboBoxes) */
+.text-field, .text-area {
+    -fx-background-color: #ffffff; /* Ensure white background */
+    -fx-background-radius: 8px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 8px;
+    -fx-padding: 8px 12px;
+}
+
+.text-field:focused, .text-area:focused {
+    -fx-border-color: #1b56fd;
+    -fx-effect: dropshadow(gaussian, rgba(27, 86, 253, 0.2), 5, 0.5, 0, 0); /* Subtle blue shadow on focus */
+}
+
+/* ComboBox styling */
+.combo-box {
+    -fx-background-color: #ffffff; /* Ensure white background */
+    -fx-background-radius: 8px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 8px;
+}
+
+.combo-box:hover {
+    -fx-color: #f0f0f0; /* Subtle background change on hover for the button part */
+}
+
+.combo-box .arrow-button {
+    -fx-background-radius: 0 8px 8px 0;
+    -fx-background-color: #f0f0f0;
+}
+
+.combo-box .arrow-button:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+/* Styling for the "Generate Description" button */
+.button.generate-button { /* Ensure your FXML button has styleClass="generate-button" */
+    -fx-background-color: #9c27b0; /* Purple color */
+    -fx-background-radius: 8px;
+    -fx-text-fill: WHITE;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 15px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.5, 2, 2);
+    -fx-transition: -fx-background-color 0.2s ease-in-out, -fx-effect 0.2s ease-in-out;
+}
+
+.button.generate-button:hover {
+    -fx-background-color: #7b1fa2; /* Darker purple on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.6, 2, 2);
+}
+
+.button.generate-button:disabled {
+    -fx-opacity: 0.6;
+    -fx-background-color: #cccccc;
+    -fx-cursor: default;
+    -fx-effect: none;
+}
+
+/* Standard Button Styling (for "Create User", "Add Item") */
+.button {
+    -fx-background-color: #1b56fd; /* Default blue for main action buttons */
+    -fx-background-radius: 8px;
+    -fx-text-fill: WHITE;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.5, 2, 2);
+    -fx-transition: -fx-background-color 0.2s ease-in-out, -fx-effect 0.2s ease-in-out;
+}
+
+.button:hover {
+    -fx-background-color: #0047b3; /* Darker blue on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.6, 2, 2);
+}
+
+/* Error label styling */
+.error-label {
+    -fx-text-fill: #dc3545; /* Red color for error messages */
+    -fx-font-size: 12px;
+}
+
+/* Success label styling (for controller messages) */
+.success-label {
+    -fx-text-fill: #28a745; /* Green color for success messages */
+    -fx-font-size: 12px;
+}

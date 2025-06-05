@@ -1,4 +1,4 @@
-package com.icet.clothify.model.dto;
+package com.icet.clothify.model.dao;
 
 import lombok.*;
 
@@ -7,12 +7,11 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class SupplierDTO {
+public class SupplierDAO {
 
     private String supplier_id;
     private String name;
     private String company;
     private String email;
-    private String item;
 
 }
