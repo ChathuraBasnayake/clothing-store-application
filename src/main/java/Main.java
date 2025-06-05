@@ -1,3 +1,6 @@
+import com.icet.clothify.repository.DAOFactory;
+import com.icet.clothify.repository.custom.ItemRepository;
+import com.icet.clothify.util.RepositoryType;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +19,7 @@ public class Main extends Application {
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("view/dashboard.fxml"))));
 
         stage.show();
+
 
     }
 }

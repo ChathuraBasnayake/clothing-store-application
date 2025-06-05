@@ -1,4 +1,10 @@
 package com.icet.clothify.repository.custom;
 
-public interface UserRepository {
+import com.icet.clothify.model.dao.UserDAO;
+import com.icet.clothify.repository.CRUDRepository;
+
+import java.sql.SQLException;
+
+public interface UserRepository extends CRUDRepository<UserDAO, String> {
+    UserDAO searchByName(String name) throws SQLException;
 }

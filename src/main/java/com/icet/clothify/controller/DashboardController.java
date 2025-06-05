@@ -29,7 +29,7 @@ public class DashboardController {
         newStage.show();
 
         // Close the current stage
-        ((Stage)((Node)event.getSource()).getScene().getWindow()).close();
+        ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
 
 
     }
@@ -42,8 +42,6 @@ public class DashboardController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
 
 
     }
