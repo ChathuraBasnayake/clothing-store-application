@@ -45,12 +45,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean userLogIn(String email, String password) throws SQLException {
-        return userRepository.searchByName(email).getPassword().equals(password);
+    public boolean userVerifier(String email, String password) throws SQLException {
+        UserDAO userDAO = userRepository.searchByEmail(email);
+        if (userDAO == null) {
+            return false;
+        }
+        return userDAO.getPassword().equals(password);
     }
 
     @Override
-    public UserDTO searchByName(String name) throws SQLException {
-        return modelMapper.map(userRepository.searchByName(name), UserDTO.class);
+    public boolean isAdmin(String email) throws SQLException {
+        UserDTO userDTO = searchByEmail(email);
+        return userDTO == null ? false : userDTO.getIsEmployee();
+    }
+
+    @Override
+    public UserDTO searchByEmail(String name) throws SQLException {
+        UserDAO userDAO = userRepository.searchByEmail(name);
+        if (userDAO == null) {
+            return null;
+        }
+        return modelMapper.map(userDAO, UserDTO.class);
     }
 }

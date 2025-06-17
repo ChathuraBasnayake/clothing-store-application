@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 public class SupplierDAO {
 
-    private String supplier_id;
+    private String id;
     private String name;
     private String company;
     private String email;

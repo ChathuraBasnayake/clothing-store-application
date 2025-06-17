@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.*?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+           minWidth="-Infinity"
+           prefHeight="450.0" prefWidth="783.0" xmlns="http://javafx.com/javafx/23.0.1"
+           fx:controller="com.icet.clothify.controller.AuthenticationController">
+    <children>
+        <!-- Login Pane -->
+        <AnchorPane fx:id="loginPane" prefHeight="450.0" prefWidth="677.0" style="-fx-background-color: #F8F8E1;">
+            <children>
+                <ImageView fitHeight="450.0" fitWidth="529.0" layoutX="334.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../img/login-form/img_2.png"/>
+                    </image>
+                </ImageView>
+                <JFXTextField fx:id="loginEmail" focusColor="WHITE" layoutX="53.0" layoutY="180.0" prefHeight="32.0"
+                              prefWidth="194.0" promptText="Email"
+                              style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;"
+                              unFocusColor="WHITE"/>
+                <JFXTextField fx:id="loginPassword" focusColor="WHITE" layoutX="53.0" layoutY="230.0" prefHeight="32.0"
+                              prefWidth="194.0" promptText="Password"
+                              style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;"
+                              unFocusColor="WHITE"/>
+                <Hyperlink layoutX="140.0" layoutY="270.0" onAction="#showForgotPasswordPane" text="Forgot Password"/>
+                <JFXButton layoutX="53.0" layoutY="310.0" onAction="#loginOnAction" prefHeight="27.0" prefWidth="194.0"
+                           style="-fx-background-color: #8ACCD5; -fx-border-radius: 25; -fx-background-radius: 25;"
+                           text="Login">
+                    <font>
+                        <Font name="System Bold" size="12.0"/>
+                    </font>
+                </JFXButton>
+                <Text layoutX="80.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Login">
+                    <font>
+                        <Font name="System Bold" size="26.0"/>
+                    </font>
+                </Text>
+                <Hyperlink layoutX="188.0" layoutY="350.0" onAction="#showSignUpPane" prefHeight="23.0" prefWidth="55.0"
+                           text="Sign Up"/>
+                <Text layoutX="53.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="If you are a new User:">
+                    <font>
+                        <Font name="Calibri Bold" size="15.0"/>
+                    </font>
+                </Text>
+            </children>
+        </AnchorPane>
+
+        <!-- Sign Up Pane -->
+        <AnchorPane fx:id="signUpPane" style="-fx-background-color: #F8F8E1;" visible="false">
+            <children>
+                <ImageView fitHeight="450.0" fitWidth="300.0" layoutX="300.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../img/login-form/img_2.png"/>
+                    </image>
+                </ImageView>
+                <Text layoutX="60.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Account">
+                    <font>
+                        <Font name="System Bold" size="26.0"/>
+                    </font>
+                </Text>
+                <JFXTextField fx:id="signUpUsername" focusColor="WHITE" layoutX="53.0" layoutY="110.0" prefHeight="32.0"
+                              prefWidth="194.0" promptText="Username"
+                              style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;"
+                              unFocusColor="WHITE"/>
+                <JFXTextField fx:id="signUpEmail" focusColor="WHITE" layoutX="53.0" layoutY="155.0" prefHeight="32.0"
+                              prefWidth="194.0" promptText="Email"
+                              style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;"
+                              unFocusColor="WHITE"/>
+                <JFXTextField fx:id="signUpPassword" focusColor="WHITE" layoutX="53.0" layoutY="200.0" prefHeight="32.0"
+                              prefWidth="194.0" promptText="Password"
+                              style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;"
+                              unFocusColor="WHITE"/>
+                <JFXTextField fx:id="signUpConfirmPassword" focusColor="WHITE" layoutX="53.0" layoutY="245.0"
+                              prefHeight="32.0" prefWidth="194.0" promptText="Confirm Password"
+                              style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;"
+                              unFocusColor="WHITE"/>
+                <JFXTextField fx:id="signUpCompany" focusColor="WHITE" layoutX="53.0" layoutY="290.0" prefHeight="32.0"
+                              prefWidth="194.0" promptText="Company"
+                              style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;"
+                              unFocusColor="WHITE"/>
+                <JFXCheckBox fx:id="signUpIsEmployee" layoutX="53.0" layoutY="335.0" text="Is Employee?"/>
+
+                <JFXButton layoutX="53.0" layoutY="370.0" onAction="#signUpOnAction" prefHeight="27.0" prefWidth="194.0"
+                           style="-fx-background-color: #8ACCD5; -fx-border-radius: 25; -fx-background-radius: 25;"
+                           text="Sign Up">
+                    <font>
+                        <Font name="System Bold" size="12.0"/>
+                    </font>
+                </JFXButton>
+                <Hyperlink layoutX="90.0" layoutY="410.0" onAction="#showLoginPane"
+                           text="Already have an account? Login"/>
+            </children>
+        </AnchorPane>
+
+        <!-- Forgot Password Pane -->
+        <AnchorPane fx:id="forgotPasswordPane" style="-fx-background-color: #F8F8E1;" visible="false">
+            <children>
+                <ImageView fitHeight="450.0" fitWidth="300.0" layoutX="300.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../img/login-form/img_2.png"/>
+                    </image>
+                </ImageView>
+                <Text layoutX="60.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot Password?">
+                    <font>
+                        <Font name="System Bold" size="22.0"/>
+                    </font>
+                </Text>
+                <Text layoutX="36.0" layoutY="190.0" textAlignment="CENTER" wrappingWidth="228.0">Enter the email
+                    address associated with your account and we'll send you a link to reset your password.
+                </Text>
+                <JFXTextField fx:id="forgotPasswordEmail" focusColor="WHITE" layoutX="53.0" layoutY="240.0"
+                              prefHeight="32.0" prefWidth="194.0" promptText="Enter your email"
+                              style="-fx-background-color: transparent; -fx-border-color: #B2DFDB; -fx-border-width: 1.5px; -fx-border-radius: 25; -fx-padding: 6 12;"
+                              unFocusColor="WHITE"/>
+                <JFXButton layoutX="53.0" layoutY="300.0" onAction="#sendLinkOnAction" prefHeight="27.0"
+                           prefWidth="194.0"
+                           style="-fx-background-color: #8ACCD5; -fx-border-radius: 25; -fx-background-radius: 25;"
+                           text="Send Reset Link">
+                    <font>
+                        <Font name="System Bold" size="12.0"/>
+                    </font>
+                </JFXButton>
+                <Hyperlink layoutX="115.0" layoutY="340.0" onAction="#showLoginPane" text="Back to Login"/>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>

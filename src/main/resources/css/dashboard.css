@@ -89,7 +89,7 @@
 }
 
 .button.generate-button:hover {
-    -fx-background-color: #7b1fa2; /* Darker purple on hover */
+    -fx-background-color: #1B56FD; /* Darker purple on hover */
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.6, 2, 2);
 }
 
@@ -102,7 +102,7 @@
 
 /* Standard Button Styling (for "Create User", "Add Item") */
 .button {
-    -fx-background-color: #1b56fd; /* Default blue for main action buttons */
+    -fx-background-color: #00CAFF; /* Default blue for main action buttons */
     -fx-background-radius: 8px;
     -fx-text-fill: WHITE;
     -fx-font-weight: bold;
@@ -127,4 +127,44 @@
 .success-label {
     -fx-text-fill: #28a745; /* Green color for success messages */
     -fx-font-size: 12px;
+}
+/* --- Styles for the Elegant Home View --- */
+
+.stat-card {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20px;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0.5, 2, 2);
+}
+
+.chart-container {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20px;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0.5, 2, 2);
+    -fx-spacing: 10px;
+}
+
+.activity-container {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20px;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0.5, 2, 2);
+    -fx-spacing: 10px;
+}
+
+/* Style for the bar chart bars */
+.chart-bar {
+    -fx-bar-fill: #1b56fd;
+    -fx-background-radius: 5px;
+}
+
+/* Remove borders from scrollpane */
+.scroll-pane {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
 }

@@ -22,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean add(OrderDTO orderDTO) throws SQLException {
+    public boolean placeOrder(OrderDTO orderDTO) throws SQLException {
         return orderRepository.add(modelMapper.map(orderDTO, OrderDAO.class));
     }
 

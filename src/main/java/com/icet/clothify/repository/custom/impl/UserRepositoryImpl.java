@@ -22,7 +22,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean add(UserDAO dao) throws SQLException {
-        return runner.update(connection, "INSERT INTO user (name, company, email, password, is_employee) VALUES (?, ?, ?, ?, ?)", dao.getName(), dao.getCompany(), dao.getEmail(), dao.getPassword(), dao.isEmployee()) > 0;
+        return runner.update(connection, "INSERT INTO user (name, company, email, password, isEmployee) VALUES (?, ?, ?, ?, ?)", dao.getName(), dao.getCompany(), dao.getEmail(), dao.getPassword(), dao.getIsEmployee()) > 0;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean update(UserDAO dao) throws SQLException {
-        return runner.update(connection, "UPDATE user SET name = ?, company = ?, email = ?, password = ?, is_employee = ? WHERE id = ?", dao.getName(), dao.getCompany(), dao.getEmail(), dao.getPassword(), dao.isEmployee(), dao.getId()) > 0;
+        return runner.update(connection, "UPDATE user SET name = ?, company = ?, email = ?, password = ?, isEmployee = ? WHERE id = ?", dao.getName(), dao.getCompany(), dao.getEmail(), dao.getPassword(), dao.getIsEmployee(), dao.getId()) > 0;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public UserDAO searchByName(String email) throws SQLException {
+    public UserDAO searchByEmail(String email) throws SQLException {
         ResultSetHandler<UserDAO> handler = new BeanHandler<>(UserDAO.class);
         return runner.query(connection, "SELECT * FROM user WHERE email = ?", handler, email);
     }

@@ -6,7 +6,9 @@ import com.icet.clothify.service.SuperService;
 import java.sql.SQLException;
 import java.util.List;
 
+
 public interface SupplierService extends SuperService {
+
 
     boolean add(SupplierDTO orderDTO) throws SQLException;
 

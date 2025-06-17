@@ -6,5 +6,5 @@ import com.icet.clothify.repository.CRUDRepository;
 import java.sql.SQLException;
 
 public interface UserRepository extends CRUDRepository<UserDAO, String> {
-    UserDAO searchByName(String name) throws SQLException;
+    UserDAO searchByEmail(String name) throws SQLException;
 }

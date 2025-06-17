@@ -21,6 +21,7 @@ public class DAOFactory {
 
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends SuperRepository> T getServices(RepositoryType type) throws SQLException {
 
         return switch (type) {
