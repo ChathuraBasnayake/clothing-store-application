@@ -18,12 +18,11 @@ public class SupplierRepositoryImpl implements SupplierRepository {
     private final QueryRunner runner = new QueryRunner();
 
     public SupplierRepositoryImpl() throws SQLException {
-        // handles exceptions by the constructor
     }
 
     @Override
     public boolean add(SupplierDAO dao) throws SQLException {
-        return runner.update(connection, "INSERT INTO supplier (name, company, email) VALUES (?, ?, ?)",
+        return runner.update(connection, "INSERT INTO suppliers (name, company, email) VALUES (?, ?, ?)",
                 dao.getName(),
                 dao.getCompany(),
                 dao.getEmail()
@@ -32,29 +31,29 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 
     @Override
     public boolean delete(String id) throws SQLException {
-        return runner.update(connection, "DELETE FROM supplier WHERE supplier_id = ?", Integer.parseInt(id)) > 0;
+        return runner.update(connection, "DELETE FROM suppliers WHERE id = ?", Integer.parseInt(id)) > 0;
     }
 
     @Override
     public boolean update(SupplierDAO dao) throws SQLException {
-        return runner.update(connection, "UPDATE supplier SET name = ?, company = ?, email = ? WHERE supplier_id = ?",
+        return runner.update(connection, "UPDATE suppliers SET name = ?, company = ?, email = ? WHERE id = ?",
                 dao.getName(),
                 dao.getCompany(),
                 dao.getEmail(),
-                dao.getSupplier_id()
+                dao.getId()
         ) > 0;
     }
 
     @Override
     public SupplierDAO searchById(String id) throws SQLException {
         ResultSetHandler<SupplierDAO> handler = new BeanHandler<>(SupplierDAO.class);
-        return runner.query(connection, "SELECT * FROM supplier WHERE supplier_id = ?", handler, id);
+        return runner.query(connection, "SELECT * FROM suppliers WHERE id = ?", handler, id);
     }
 
     @Override
     public List<SupplierDAO> getAll() throws SQLException {
         ResultSetHandler<List<SupplierDAO>> handler = new BeanListHandler<>(SupplierDAO.class);
-        System.out.println(runner.query(connection, "SELECT * FROM supplier", handler));
-        return runner.query(connection, "SELECT * FROM supplier", handler);
+
+        return runner.query(connection, "SELECT * FROM suppliers", handler);
     }
 }

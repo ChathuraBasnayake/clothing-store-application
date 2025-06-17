@@ -15,5 +15,4 @@ public interface CRUDRepository<T, ID> extends SuperRepository {
 
     List<T> getAll() throws SQLException;
 
-
 }

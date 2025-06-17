@@ -30,6 +30,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDTO> getAll() throws SQLException {
 
+        System.out.println(itemRepository.getAll() + "ASER");
         return itemRepository.getAll().stream().map(itemDAO -> modelMapper.map(itemDAO, ItemDTO.class)).collect(Collectors.toList());
     }
 

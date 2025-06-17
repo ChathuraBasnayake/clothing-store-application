@@ -1,394 +1,756 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import java.lang.String?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #f8f9fa; -fx-background-radius: 20px;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.icet.clothify.controller.DashboardController">
-   <left>
-      <AnchorPane prefWidth="80.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20px 0px 0px 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0.5, 3, 3);" BorderPane.alignment="CENTER">
-         <children>
-
-            <VBox alignment="CENTER" layoutX="0.0" layoutY="100.0" prefWidth="80.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <Separator prefWidth="200.0" style="-fx-background-color: #e0e0e0;" />
-                  <Button fx:id="homeBtn" onAction="#handleNavigation" styleClass="sidebar-button" text=" ">
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                     <graphic>
-                        <FontAwesomeIconView glyphName="HOME" size="1.8em" />
-                     </graphic>
-                  </Button>
-                  <Button fx:id="addUserBtn" onAction="#handleNavigation" styleClass="sidebar-button" text=" ">
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                     <graphic>
-                        <FontAwesomeIconView glyphName="USER_PLUS" size="1.8em" />
-                     </graphic>
-                  </Button>
-                  <Button fx:id="settingsBtn" onAction="#handleNavigation" styleClass="sidebar-button" text=" ">
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                     <graphic>
-                        <FontAwesomeIconView glyphName="COG" size="1.8em" />
-                     </graphic>
-                  </Button>
-                  <Separator prefWidth="200.0" style="-fx-background-color: #e0e0e0;" />
-                  <Button fx:id="addItemBtn" onAction="#handleNavigation" styleClass="sidebar-button" text=" ">
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                     <graphic>
-                        <FontAwesomeIconView glyphName="PLUS" size="1.8em" />
-                     </graphic>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
-            </VBox>
-            <Button layoutX="15.0" layoutY="620.0" style="-fx-background-color: #1b56fd; -fx-background-radius: 15px;" AnchorPane.bottomAnchor="25.0">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="POWER_OFF" size="1.5em" />
-               </graphic>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </Button>
-            <FontAwesomeIconView glyphName="ROCKET" layoutX="29.0" layoutY="45.0" size="2em" />
-         </children>
-      </AnchorPane>
-   </left>
-   <center>
-      <AnchorPane BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="20.0" prefHeight="60.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0.5, 3, 3);" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
-               <children>
-                  <Label text="Dashboard" textFill="#1b56fd">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Separator orientation="VERTICAL">
-                     <HBox.margin>
-                        <Insets left="15.0" right="15.0" />
-                     </HBox.margin>
-                  </Separator>
-                  <Label text="Hello Mate, welcome back!" textFill="#4a4a4a">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
-                     <children>
-                        <FontAwesomeIconView glyphName="CALENDAR" size="1.8em" />
-                        <Label fx:id="dateTimeLabel" text="May 29, 2025 10:30 AM" textFill="#888888">
-                           <font>
-                              <Font name="System Regular" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="5.0" right="20.0" />
-                           </HBox.margin>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #f4f7fc;"
+            xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.icet.clothify.controller.DashboardController">
+    <left>
+        <AnchorPane prefWidth="80.0"
+                    style="-fx-background-color: #ffffff; -fx-background-radius: 20px 0px 0px 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0.5, 3, 3);"
+                    BorderPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" layoutX="0.0" layoutY="100.0" prefWidth="80.0" spacing="20.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <children>
+                        <Separator prefWidth="200.0" style="-fx-background-color: #e0e0e0;"/>
+                        <Button fx:id="homeBtn" onAction="#handleNavigation" styleClass="sidebar-button" text=" ">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="HOME" size="1.8em"/>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="makeOrderBtn" onAction="#handleNavigation" styleClass="sidebar-button" text=" ">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="SHOPPING_CART" size="1.8em"/>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="addUserBtn" onAction="#handleNavigation" styleClass="sidebar-button" text=" ">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="USER_PLUS" size="1.8em"/>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="addSupplierBtn" onAction="#handleNavigation" styleClass="sidebar-button"
+                                text=" ">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="TRUCK" size="1.8em"/>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="settingsBtn" onAction="#handleNavigation" styleClass="sidebar-button" text=" ">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="COG" size="1.8em"/>
+                            </graphic>
+                        </Button>
+                        <Separator prefWidth="200.0" style="-fx-background-color: #e0e0e0;"/>
+                        <Button fx:id="addItemBtn" onAction="#handleNavigation" styleClass="sidebar-button" text=" ">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="PLUS" size="1.8em"/>
+                            </graphic>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets top="20.0"/>
+                    </padding>
+                </VBox>
+                <Button fx:id="logoutBtn" layoutX="15.0" layoutY="620.0" onAction="#handleNavigation"
+                        style="-fx-background-color: #1b56fd; -fx-background-radius: 15px;"
+                        AnchorPane.bottomAnchor="25.0">
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="POWER_OFF" size="1.5em"/>
+                    </graphic>
+                </Button>
+                <FontAwesomeIconView glyphName="ROCKET" layoutX="29.0" layoutY="45.0" size="2em"/>
+            </children>
+        </AnchorPane>
+    </left>
+    <center>
+        <AnchorPane>
+            <children>
+                <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="20.0" prefHeight="60.0"
+                      style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0.5, 3, 3);"
+                      AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
+                    <children>
+                        <Label text="Dashboard" textFill="#1b56fd">
+                            <font>
+                                <Font name="System Bold" size="20.0"/>
+                            </font>
+                            <HBox.margin>
+                                <Insets left="20.0"/>
+                            </HBox.margin>
                         </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-
-            <StackPane fx:id="contentStackPane" layoutX="30.0" layoutY="100.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
-
-               <VBox fx:id="homeView" spacing="20.0" style="-fx-background-color: #f8f9fa;">
-                  <Label text="Clothify Overview" textFill="#333333">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <GridPane hgap="20.0" vgap="20.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="180.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <Pane style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 3, 3);">
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </padding>
-                           <children>
-                              <Label layoutX="0.0" layoutY="0.0" text="Total Items" textFill="#4a4a4a">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="0.0" layoutY="30.0" text="1,234" textFill="#333333">
-                                 <font>
-                                    <Font name="System Bold" size="36.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="0.0" layoutY="70.0" text="+15% from last month" textFill="#888888">
-                                 <font>
-                                    <Font name="System Regular" size="12.0" />
-                                 </font>
-                              </Label>
-                              <FontAwesomeIconView glyphName="CUBE" layoutX="158.0" layoutY="33.0" size="2em" wrappingWidth="24.0" />
-                           </children>
-                        </Pane>
-                        <Pane style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 3, 3);" GridPane.columnIndex="1">
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </padding>
-                           <children>
-                              <Label layoutX="0.0" layoutY="0.0" text="New Users" textFill="#4a4a4a">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="0.0" layoutY="30.0" text="87" textFill="#333333">
-                                 <font>
-                                    <Font name="System Bold" size="36.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="0.0" layoutY="70.0" text="Recently joined" textFill="#888888">
-                                 <font>
-                                    <Font name="System Regular" size="12.0" />
-                                 </font>
-                              </Label>
-                              <FontAwesomeIconView glyphName="USER_PLUS" layoutX="158.0" layoutY="33.0" size="2em" wrappingWidth="24.0" />
-                           </children>
-                        </Pane>
-                        <Pane style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 3, 3);" GridPane.columnIndex="2">
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </padding>
-                           <children>
-                              <Label layoutX="0.0" layoutY="0.0" text="Pending Orders" textFill="#4a4a4a">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="0.0" layoutY="30.0" text="12" textFill="#333333">
-                                 <font>
-                                    <Font name="System Bold" size="36.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="0.0" layoutY="70.0" text="Action required" textFill="#888888">
-                                 <font>
-                                    <Font name="System Regular" size="12.0" />
-                                 </font>
-                              </Label>
-                              <FontAwesomeIconView glyphName="CLOCK" layoutX="158.0" layoutY="34.0" size="2em" text="" wrappingWidth="24.0" />
-                           </children>
-                        </Pane>
-                        <Pane style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 3, 3);" GridPane.columnSpan="3" GridPane.rowIndex="1">
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </padding>
-                           <children>
-                              <Label layoutX="0.0" layoutY="0.0" text="Recent Activity" textFill="#4a4a4a">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <VBox layoutX="0.0" layoutY="30.0" spacing="8.0">
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" spacing="5.0">
-                                       <children>
-                                          <Label text="•" textFill="#28a745" />
-                                          <Label text="New item &quot;Vintage T-Shirt&quot; added by John Doe." textFill="#666666" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="5.0">
-                                       <children>
-                                          <Label text="•" textFill="#1b56fd" />
-                                          <Label text="User &quot;Jane Smith&quot; registered." textFill="#666666" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="5.0">
-                                       <children>
-                                          <Label text="•" textFill="#dc3545" />
-                                          <Label text="Order #1001 status changed to &quot;Pending Shipment&quot;." textFill="#666666" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </Pane>
-                     </children>
-                  </GridPane>
-               </VBox>
-
-               <VBox fx:id="addUserView" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" visible="false">
-                  <children>
-                     <Pane prefHeight="450.0" prefWidth="550.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 3, 3);">
+                        <Separator orientation="VERTICAL">
+                            <HBox.margin>
+                                <Insets left="15.0" right="15.0"/>
+                            </HBox.margin>
+                        </Separator>
+                        <Label text="Hello Mate, welcome back!" textFill="#4a4a4a">
+                            <font>
+                                <Font name="System Bold" size="16.0"/>
+                            </font>
+                        </Label>
+                        <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                            <children>
+                                <FontAwesomeIconView glyphName="CALENDAR" size="1.8em"/>
+                                <Label fx:id="dateTimeLabel" text="May 29, 2025 10:30 AM" textFill="#888888">
+                                    <font>
+                                        <Font name="System Regular" size="14.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="5.0" right="20.0"/>
+                                    </HBox.margin>
+                                </Label>
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+                <StackPane fx:id="contentStackPane" layoutX="30.0" layoutY="100.0" AnchorPane.bottomAnchor="30.0"
+                           AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
+                    <!-- Elegant Home View -->
+                    <VBox fx:id="homeView" spacing="20.0" style="-fx-background-color: transparent;">
                         <children>
-                           <Label layoutX="40.0" layoutY="30.0" text="Add New User" textFill="#333333">
-                              <font>
-                                 <Font name="System Bold" size="22.0" />
-                              </font>
-                           </Label>
-                           <Label layoutX="40.0" layoutY="90.0" text="User ID" textFill="#4a4a4a">
-                              <font>
-                                 <Font name="System Medium" size="14.0" />
-                              </font>
-                           </Label>
-                           <TextField fx:id="userIdField" layoutX="40.0" layoutY="115.0" prefHeight="35.0" prefWidth="220.0" promptText="Enter a unique user ID" style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;" />
-                           <Label layoutX="40.0" layoutY="170.0" text="Full Name" textFill="#4a4a4a">
-                              <font>
-                                 <Font name="System Medium" size="14.0" />
-                              </font>
-                           </Label>
-                           <TextField fx:id="userNameField" layoutX="40.0" layoutY="195.0" prefHeight="35.0" prefWidth="220.0" promptText="Enter user's full name" style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;" />
-                           <Label layoutX="40.0" layoutY="250.0" text="Password" textFill="#4a4a4a">
-                              <font>
-                                 <Font name="System Medium" size="14.0" />
-                              </font>
-                           </Label>
-                           <PasswordField fx:id="passwordField" layoutX="40.0" layoutY="275.0" prefHeight="35.0" prefWidth="220.0" promptText="Enter password" style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;" />
-                           <Label layoutX="290.0" layoutY="90.0" text="Company" textFill="#4a4a4a">
-                              <font>
-                                 <Font name="System Medium" size="14.0" />
-                              </font>
-                           </Label>
-                           <TextField fx:id="companyField" layoutX="290.0" layoutY="115.0" prefHeight="35.0" prefWidth="220.0" promptText="Enter company name" style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;" />
-                           <Label layoutX="290.0" layoutY="170.0" text="Email Address" textFill="#4a4a4a">
-                              <font>
-                                 <Font name="System Medium" size="14.0" />
-                              </font>
-                           </Label>
-                           <TextField fx:id="emailField" layoutX="290.0" layoutY="195.0" prefHeight="35.0" prefWidth="220.0" promptText="Enter user's email" style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;" />
-                           <Label layoutX="290.0" layoutY="250.0" text="Confirm Password" textFill="#4a4a4a">
-                              <font>
-                                 <Font name="System Medium" size="14.0" />
-                              </font>
-                           </Label>
-                           <PasswordField fx:id="confirmPasswordField" layoutX="290.0" layoutY="275.0" prefHeight="35.0" prefWidth="220.0" promptText="Confirm password" style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;" />
-                           <Button layoutX="40.0" layoutY="355.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="470.0" style="-fx-background-color: #1b56fd; -fx-background-radius: 8px;" text="Create User" textFill="WHITE">
-                              <font>
-                                 <Font name="System Bold" size="16.0" />
-                              </font>
-                           </Button>
+                            <ScrollPane fitToWidth="true" hbarPolicy="NEVER"
+                                        style="-fx-background-color: transparent; -fx-background: transparent;"
+                                        VBox.vgrow="ALWAYS">
+                                <content>
+                                    <VBox spacing="20.0">
+                                        <children>
+                                            <Label text="Clothify Overview" textFill="#333333">
+                                                <font>
+                                                    <Font name="System Bold" size="24.0"/>
+                                                </font>
+                                            </Label>
+                                            <GridPane hgap="20.0" vgap="20.0">
+                                                <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                                                </columnConstraints>
+                                                <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                                </rowConstraints>
+                                                <children>
+                                                    <VBox alignment="CENTER_LEFT" styleClass="stat-card">
+                                                        <children>
+                                                            <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                                                <children>
+                                                                    <Pane style="-fx-background-color: #e0f7fa; -fx-background-radius: 50;">
+                                                                        <padding>
+                                                                            <Insets bottom="12.0" left="12.0"
+                                                                                    right="12.0" top="12.0"/>
+                                                                        </padding>
+                                                                        <children>
+                                                                            <FontAwesomeIconView fill="#0097a7"
+                                                                                                 glyphName="DOLLAR"
+                                                                                                 size="1.8em"/>
+                                                                        </children>
+                                                                    </Pane>
+                                                                    <VBox>
+                                                                        <children>
+                                                                            <Label text="Total Sales"
+                                                                                   textFill="#546e7a">
+                                                                                <font>
+                                                                                    <Font name="System Bold"
+                                                                                          size="14.0"/>
+                                                                                </font>
+                                                                            </Label>
+                                                                            <Label text="\$54,294">
+                                                                                <font>
+                                                                                    <Font name="System Bold"
+                                                                                          size="28.0"/>
+                                                                                </font>
+                                                                            </Label>
+                                                                            <Label text="+2.5% from last month"
+                                                                                   textFill="#2e7d32"/>
+                                                                        </children>
+                                                                    </VBox>
+                                                                </children>
+                                                            </HBox>
+                                                        </children>
+                                                    </VBox>
+                                                    <VBox alignment="CENTER_LEFT" styleClass="stat-card"
+                                                          GridPane.columnIndex="1">
+                                                        <children>
+                                                            <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                                                <children>
+                                                                    <Pane style="-fx-background-color: #fff3e0; -fx-background-radius: 50;">
+                                                                        <padding>
+                                                                            <Insets bottom="12.0" left="12.0"
+                                                                                    right="12.0" top="12.0"/>
+                                                                        </padding>
+                                                                        <children>
+                                                                            <FontAwesomeIconView fill="#ff9800"
+                                                                                                 glyphName="USERS"
+                                                                                                 size="1.8em"/>
+                                                                        </children>
+                                                                    </Pane>
+                                                                    <VBox>
+                                                                        <children>
+                                                                            <Label text="New Users" textFill="#546e7a">
+                                                                                <font>
+                                                                                    <Font name="System Bold"
+                                                                                          size="14.0"/>
+                                                                                </font>
+                                                                            </Label>
+                                                                            <Label text="87">
+                                                                                <font>
+                                                                                    <Font name="System Bold"
+                                                                                          size="28.0"/>
+                                                                                </font>
+                                                                            </Label>
+                                                                            <Label text="5 registered today"
+                                                                                   textFill="#2e7d32"/>
+                                                                        </children>
+                                                                    </VBox>
+                                                                </children>
+                                                            </HBox>
+                                                        </children>
+                                                    </VBox>
+                                                    <VBox alignment="CENTER_LEFT" styleClass="stat-card"
+                                                          GridPane.columnIndex="2">
+                                                        <children>
+                                                            <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                                                <children>
+                                                                    <Pane style="-fx-background-color: #e8eaf6; -fx-background-radius: 50;">
+                                                                        <padding>
+                                                                            <Insets bottom="12.0" left="12.0"
+                                                                                    right="12.0" top="12.0"/>
+                                                                        </padding>
+                                                                        <children>
+                                                                            <FontAwesomeIconView fill="#3f51b5"
+                                                                                                 glyphName="CUBE"
+                                                                                                 size="1.8em"/>
+                                                                        </children>
+                                                                    </Pane>
+                                                                    <VBox>
+                                                                        <children>
+                                                                            <Label text="Total Items"
+                                                                                   textFill="#546e7a">
+                                                                                <font>
+                                                                                    <Font name="System Bold"
+                                                                                          size="14.0"/>
+                                                                                </font>
+                                                                            </Label>
+                                                                            <Label text="1,234">
+                                                                                <font>
+                                                                                    <Font name="System Bold"
+                                                                                          size="28.0"/>
+                                                                                </font>
+                                                                            </Label>
+                                                                            <Label text="12 added this week"
+                                                                                   textFill="#2e7d32"/>
+                                                                        </children>
+                                                                    </VBox>
+                                                                </children>
+                                                            </HBox>
+                                                        </children>
+                                                    </VBox>
+                                                </children>
+                                            </GridPane>
+                                            <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+                                                <children>
+                                                    <VBox styleClass="chart-container" HBox.hgrow="ALWAYS">
+                                                        <children>
+                                                            <Label text="Monthly Sales">
+                                                                <font>
+                                                                    <Font name="System Bold" size="16.0"/>
+                                                                </font>
+                                                            </Label>
+                                                            <BarChart fx:id="salesChart" animated="false" barGap="5.0"
+                                                                      categoryGap="20.0" legendVisible="false">
+                                                                <xAxis>
+                                                                    <CategoryAxis side="BOTTOM"/>
+                                                                </xAxis>
+                                                                <yAxis>
+                                                                    <NumberAxis side="LEFT"/>
+                                                                </yAxis>
+                                                            </BarChart>
+                                                        </children>
+                                                    </VBox>
+                                                    <VBox minWidth="-Infinity" prefWidth="320.0"
+                                                          styleClass="activity-container">
+                                                        <children>
+                                                            <Label text="Recent Activity">
+                                                                <font>
+                                                                    <Font name="System Bold" size="16.0"/>
+                                                                </font>
+                                                            </Label>
+                                                            <ListView fx:id="activityListView">
+                                                                <items>
+                                                                    <FXCollections fx:factory="observableArrayList">
+                                                                        <String fx:value="New item 'Vintage T-Shirt' added."/>
+                                                                        <String fx:value="User 'Jane Smith' registered."/>
+                                                                        <String fx:value="Order #1001 shipped."/>
+                                                                        <String fx:value="Low stock warning for 'Classic Jeans'."/>
+                                                                    </FXCollections>
+                                                                </items>
+                                                            </ListView>
+                                                        </children>
+                                                    </VBox>
+                                                </children>
+                                            </HBox>
+                                        </children>
+                                        <padding>
+                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                        </padding>
+                                    </VBox>
+                                </content>
+                            </ScrollPane>
                         </children>
-                     </Pane>
-                  </children>
-               </VBox>
+                    </VBox>
 
-               <VBox fx:id="settingsView" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" visible="false">
-                  <children>
-                     <Pane prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 3, 3);">
+                    <!-- Add Supplier View (CORRECTED LAYOUT) -->
+                    <VBox fx:id="addSupplierView" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0"
+                          visible="false">
                         <children>
-                           <Label layoutX="40.0" layoutY="30.0" text="Settings" textFill="#333333">
-                              <font>
-                                 <Font name="System Bold" size="22.0" />
-                              </font>
-                           </Label>
-                           <Label layoutX="40.0" layoutY="80.0" text="This section would contain various application settings like user preferences, notification settings, etc." textFill="#666666" wrapText="true">
-                              <font>
-                                 <Font name="System Regular" size="14.0" />
-                              </font>
-                           </Label>
+                            <Pane prefHeight="450.0" prefWidth="550.0"
+                                  style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 3, 3);">
+                                <children>
+                                    <Label layoutX="40.0" layoutY="30.0" text="Add New Supplier" textFill="#333333">
+                                        <font>
+                                            <Font name="System Bold" size="22.0"/>
+                                        </font>
+                                    </Label>
+                                    <!-- Replaced GridPane with VBox and HBox for better layout control -->
+                                    <VBox layoutX="40.0" layoutY="90.0" prefWidth="470.0" spacing="20.0">
+                                        <children>
+                                            <HBox spacing="30.0">
+                                                <children>
+                                                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                        <children>
+                                                            <Label text="Supplier Name" textFill="#4a4a4a">
+                                                                <font>
+                                                                    <Font name="System Medium" size="14.0"/>
+                                                                </font>
+                                                            </Label>
+                                                            <TextField fx:id="supplierNameField" prefHeight="35.0"
+                                                                       promptText="e.g., Prime Textiles"
+                                                                       styleClass="form-field"/>
+                                                        </children>
+                                                    </VBox>
+                                                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                        <children>
+                                                            <Label text="Company" textFill="#4a4a4a">
+                                                                <font>
+                                                                    <Font name="System Medium" size="14.0"/>
+                                                                </font>
+                                                            </Label>
+                                                            <TextField fx:id="supplierCompanyField" prefHeight="35.0"
+                                                                       promptText="e.g., Prime Textiles (Pvt) Ltd"
+                                                                       styleClass="form-field"/>
+                                                        </children>
+                                                    </VBox>
+                                                </children>
+                                            </HBox>
+                                            <HBox spacing="30.0">
+                                                <children>
+                                                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                        <children>
+                                                            <Label text="Email Address" textFill="#4a4a4a">
+                                                                <font>
+                                                                    <Font name="System Medium" size="14.0"/>
+                                                                </font>
+                                                            </Label>
+                                                            <TextField fx:id="supplierEmailField" prefHeight="35.0"
+                                                                       promptText="e.g., contact@primetextiles.com"
+                                                                       styleClass="form-field"/>
+                                                        </children>
+                                                    </VBox>
+                                                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                        <children>
+                                                            <Label text="Phone Number" textFill="#4a4a4a">
+                                                                <font>
+                                                                    <Font name="System Medium" size="14.0"/>
+                                                                </font>
+                                                            </Label>
+                                                            <TextField fx:id="supplierPhoneField" prefHeight="35.0"
+                                                                       promptText="e.g., 0771234567"
+                                                                       styleClass="form-field"/>
+                                                        </children>
+                                                    </VBox>
+                                                </children>
+                                            </HBox>
+                                        </children>
+                                    </VBox>
+                                    <Button layoutX="40.0" layoutY="365.0" mnemonicParsing="false"
+                                            onAction="#handleSaveSupplier" prefHeight="40.0" prefWidth="470.0"
+                                            styleClass="button-primary" text="Save Supplier" textFill="WHITE">
+                                        <font>
+                                            <Font name="System Bold" size="16.0"/>
+                                        </font>
+                                    </Button>
+                                </children>
+                            </Pane>
                         </children>
-                     </Pane>
-                  </children>
-               </VBox>
+                    </VBox>
 
-               <VBox fx:id="addItemView" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" visible="false">
-                  <children>
-                     <Pane prefHeight="580.0" prefWidth="550.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 3, 3);">
+                    <!-- Make Order View -->
+                    <VBox fx:id="makeOrderView" spacing="15.0" style="-fx-background-color: transparent;"
+                          visible="false">
+                        <padding>
+                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                        </padding>
                         <children>
-                           <Label layoutX="40.0" layoutY="30.0" text="Add New Item" textFill="#333333">
-                              <font>
-                                 <Font name="System Bold" size="22.0" />
-                              </font>
-                           </Label>
-
-                           <Label layoutX="40.0" layoutY="90.0" text="Item Name" textFill="#4a4a4a">
-                              <font><Font name="System Medium" size="14.0" /></font>
-                           </Label>
-                           <TextField fx:id="itemNameField" layoutX="40.0" layoutY="115.0" prefHeight="35.0" prefWidth="220.0" promptText="e.g., Men's Classic T-Shirt" style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;" />
-
-                           <Label layoutX="40.0" layoutY="170.0" text="Category" textFill="#4a4a4a">
-                              <font><Font name="System Medium" size="14.0" /></font>
-                           </Label>
-                           <ComboBox fx:id="itemCategoryComboBox" layoutX="40.0" layoutY="195.0" prefHeight="35.0" prefWidth="220.0" promptText="Select a category" style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;" />
-
-                           <Label layoutX="40.0" layoutY="250.0" text="Size" textFill="#4a4a4a">
-                              <font><Font name="System Medium" size="14.0" /></font>
-                           </Label>
-                           <ComboBox fx:id="itemSizeComboBox" layoutX="40.0" layoutY="275.0" prefHeight="35.0" prefWidth="220.0" promptText="Select a size" style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;" />
-
-                           <Label layoutX="290.0" layoutY="90.0" text="Price" textFill="#4a4a4a">
-                              <font><Font name="System Medium" size="14.0" /></font>
-                           </Label>
-                           <TextField fx:id="itemPriceField" layoutX="290.0" layoutY="115.0" prefHeight="35.0" prefWidth="220.0" promptText="e.g., 29.99" style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;" />
-
-                           <Label layoutX="290.0" layoutY="170.0" text="Quantity" textFill="#4a4a4a">
-                              <font><Font name="System Medium" size="14.0" /></font>
-                           </Label>
-                           <TextField fx:id="itemQuantityField" layoutX="290.0" layoutY="195.0" prefHeight="35.0" prefWidth="220.0" promptText="e.g., 100" style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;" />
-
-                           <Label layoutX="290.0" layoutY="250.0" text="Supplier" textFill="#4a4a4a">
-                              <font><Font name="System Medium" size="14.0" /></font>
-                           </Label>
-                           <ComboBox fx:id="supplierComboBox" layoutX="290.0" layoutY="275.0" prefHeight="35.0" prefWidth="220.0" promptText="Select a supplier" style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;" />
-
-                           <Label layoutX="40.0" layoutY="330.0" text="Item Description" textFill="#4a4a4a">
-                              <font>
-                                 <Font name="System Medium" size="14.0" />
-                              </font>
-                           </Label>
-                           <Button fx:id="generateDescriptionBtn" layoutX="190.0" layoutY="325.0" mnemonicParsing="false" onAction="#generateItemDescription" prefHeight="30.0" style="-fx-background-color: #9c27b0; -fx-background-radius: 8px;" text="Generate with AI ✨" textFill="WHITE">
-                              <font>
-                                 <Font name="System Bold" size="12.0" />
-                              </font>
-                           </Button>
-                           <TextArea fx:id="itemDescriptionArea" layoutX="40.0" layoutY="365.0" prefHeight="100.0" prefWidth="470.0" promptText="A compelling description generated by AI..." style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;" wrapText="true" />
-                           <Label fx:id="descriptionErrorLabel" layoutX="40.0" layoutY="470.0" textFill="#dc3545" visible="false" />
-
-                           <Button layoutX="40.0" layoutY="495.0" mnemonicParsing="false" onAction="#handleAddItemSubmit" prefHeight="40.0" prefWidth="470.0" style="-fx-background-color: #1b56fd; -fx-background-radius: 8px;" text="Add Item to Inventory" textFill="WHITE">
-                              <font>
-                                 <Font name="System Bold" size="16.0" />
-                              </font>
-                           </Button>
+                            <Label text="Create New Order" textFill="#333333">
+                                <font>
+                                    <Font name="System Bold" size="24.0"/>
+                                </font>
+                            </Label>
+                            <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+                                <children>
+                                    <VBox prefWidth="600.0" spacing="15.0" styleClass="form-container"
+                                          HBox.hgrow="ALWAYS">
+                                        <children>
+                                            <Label text="Add Items to Order">
+                                                <font>
+                                                    <Font name="System Bold" size="16.0"/>
+                                                </font>
+                                            </Label>
+                                            <HBox alignment="BOTTOM_LEFT" spacing="10.0">
+                                                <children>
+                                                    <VBox HBox.hgrow="ALWAYS">
+                                                        <children>
+                                                            <Label text="Search Item" textFill="#4a4a4a"/>
+                                                            <ComboBox fx:id="orderItemComboBox" prefHeight="35.0"
+                                                                      prefWidth="400.0"
+                                                                      promptText="Type to search for an item..."
+                                                                      styleClass="form-field"/>
+                                                        </children>
+                                                    </VBox>
+                                                    <VBox>
+                                                        <children>
+                                                            <Label text="Quantity" textFill="#4a4a4a"/>
+                                                            <TextField fx:id="orderItemQtyField" prefHeight="35.0"
+                                                                       prefWidth="80.0" promptText="1"
+                                                                       styleClass="form-field" text="1"/>
+                                                        </children>
+                                                    </VBox>
+                                                    <Button onAction="#handleAddToOrder" prefHeight="35.0"
+                                                            prefWidth="100.0" styleClass="button-primary" text="Add"/>
+                                                </children>
+                                            </HBox>
+                                            <TableView fx:id="orderItemsTableView" VBox.vgrow="ALWAYS">
+                                                <columns>
+                                                    <TableColumn fx:id="colItemName" prefWidth="250.0"
+                                                                 text="Item Name"/>
+                                                    <TableColumn fx:id="colItemQty" prefWidth="70.0" text="Quantity"/>
+                                                    <TableColumn fx:id="colItemPrice" prefWidth="100.0"
+                                                                 text="Unit Price"/>
+                                                    <TableColumn fx:id="colItemTotal" prefWidth="100.0" text="Total"/>
+                                                </columns>
+                                                <columnResizePolicy>
+                                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                                                </columnResizePolicy>
+                                            </TableView>
+                                            <Button onAction="#handleRemoveSelectedItem" prefHeight="35.0"
+                                                    styleClass="button-danger" text="Remove Selected Item"/>
+                                        </children>
+                                    </VBox>
+                                    <VBox prefWidth="350.0" spacing="15.0" styleClass="form-container">
+                                        <children>
+                                            <Label text="Order Summary">
+                                                <font>
+                                                    <Font name="System Bold" size="16.0"/>
+                                                </font>
+                                            </Label>
+                                            <GridPane vgap="10.0">
+                                                <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                                                </columnConstraints>
+                                                <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                                </rowConstraints>
+                                                <children>
+                                                    <VBox>
+                                                        <children>
+                                                            <Label text="Order ID" textFill="#4a4a4a"/>
+                                                            <TextField fx:id="orderIdField" disable="true"
+                                                                       promptText="Auto-Generated"
+                                                                       styleClass="form-field"/>
+                                                        </children>
+                                                    </VBox>
+                                                    <VBox GridPane.rowIndex="1">
+                                                        <children>
+                                                            <Label text="Payment Method" textFill="#4a4a4a"/>
+                                                            <ComboBox fx:id="orderPaymentMethodComboBox"
+                                                                      prefHeight="26.0" prefWidth="Infinity"
+                                                                      promptText="Select Method"
+                                                                      styleClass="form-field"/>
+                                                        </children>
+                                                    </VBox>
+                                                    <VBox GridPane.rowIndex="2">
+                                                        <children>
+                                                            <Label text="Processing Employee" textFill="#4a4a4a"/>
+                                                            <ComboBox fx:id="orderEmployeeComboBox" prefWidth="Infinity"
+                                                                      promptText="Select Employee"
+                                                                      styleClass="form-field"/>
+                                                        </children>
+                                                    </VBox>
+                                                </children>
+                                            </GridPane>
+                                            <Separator/>
+                                            <HBox alignment="CENTER_LEFT">
+                                                <children>
+                                                    <Label text="GRAND TOTAL" textFill="#333333">
+                                                        <font>
+                                                            <Font name="System Bold" size="18.0"/>
+                                                        </font>
+                                                    </Label>
+                                                    <Label fx:id="orderTotalLabel" alignment="CENTER_RIGHT"
+                                                           maxWidth="1.7976931348623157E308" text="LKR 0.00"
+                                                           textFill="#1b56fd" HBox.hgrow="ALWAYS">
+                                                        <font>
+                                                            <Font name="System Bold" size="24.0"/>
+                                                        </font>
+                                                    </Label>
+                                                </children>
+                                            </HBox>
+                                            <Button onAction="#handlePlaceOrder" prefHeight="45.0" prefWidth="Infinity"
+                                                    styleClass="button-success" text="Place Order">
+                                                <font>
+                                                    <Font name="System Bold" size="19.0"/>
+                                                </font>
+                                            </Button>
+                                        </children>
+                                    </VBox>
+                                </children>
+                            </HBox>
                         </children>
-                     </Pane>
-                  </children>
-               </VBox>
-            </StackPane>
-         </children>
-      </AnchorPane>
-   </center>
+                    </VBox>
 
-   <stylesheets>
-      <String fx:value="/css/dashboard.css" />
-   </stylesheets>
+                    <!-- Add User View -->
+                    <VBox fx:id="addUserView" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0"
+                          visible="false">
+                        <children>
+                            <Pane prefHeight="450.0" prefWidth="550.0"
+                                  style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 3, 3);">
+                                <children>
+                                    <Label layoutX="40.0" layoutY="30.0" text="Add New User" textFill="#333333">
+                                        <font>
+                                            <Font name="System Bold" size="22.0"/>
+                                        </font>
+                                    </Label>
+                                    <Label layoutX="40.0" layoutY="90.0" text="User ID" textFill="#4a4a4a">
+                                        <font>
+                                            <Font name="System Medium" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="userIdField" layoutX="40.0" layoutY="115.0" prefHeight="35.0"
+                                               prefWidth="220.0" promptText="Enter a unique user ID"
+                                               style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+                                    <Label layoutX="40.0" layoutY="170.0" text="Full Name" textFill="#4a4a4a">
+                                        <font>
+                                            <Font name="System Medium" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="userNameField" layoutX="40.0" layoutY="195.0" prefHeight="35.0"
+                                               prefWidth="220.0" promptText="Enter user's full name"
+                                               style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+                                    <Label layoutX="40.0" layoutY="250.0" text="Password" textFill="#4a4a4a">
+                                        <font>
+                                            <Font name="System Medium" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <PasswordField fx:id="passwordField" layoutX="40.0" layoutY="275.0"
+                                                   prefHeight="35.0" prefWidth="220.0" promptText="Enter password"
+                                                   style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+                                    <Label layoutX="290.0" layoutY="90.0" text="Company" textFill="#4a4a4a">
+                                        <font>
+                                            <Font name="System Medium" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="companyField" layoutX="290.0" layoutY="115.0" prefHeight="35.0"
+                                               prefWidth="220.0" promptText="Enter company name"
+                                               style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+                                    <Label layoutX="290.0" layoutY="170.0" text="Email Address" textFill="#4a4a4a">
+                                        <font>
+                                            <Font name="System Medium" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="emailField" layoutX="290.0" layoutY="195.0" prefHeight="35.0"
+                                               prefWidth="220.0" promptText="Enter user's email"
+                                               style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+                                    <Label layoutX="290.0" layoutY="250.0" text="Confirm Password" textFill="#4a4a4a">
+                                        <font>
+                                            <Font name="System Medium" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <PasswordField fx:id="confirmPasswordField" layoutX="290.0" layoutY="275.0"
+                                                   prefHeight="35.0" prefWidth="220.0" promptText="Confirm password"
+                                                   style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+                                    <Button layoutX="40.0" layoutY="365.0" mnemonicParsing="false"
+                                            onAction="#handleCreateUser" prefHeight="40.0" prefWidth="470.0"
+                                            style="-fx-background-color: #1b56fd; -fx-background-radius: 8px;"
+                                            text="Create User" textFill="WHITE">
+                                        <font>
+                                            <Font name="System Bold" size="16.0"/>
+                                        </font>
+                                    </Button>
+                                    <JFXCheckBox fx:id="isEmployeeCheckBox" layoutX="40.0" layoutY="324.0"
+                                                 text="Employee"/>
+                                    <ImageView fitHeight="408.0" fitWidth="645.0" layoutX="560.0" layoutY="21.0"
+                                               pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../img/dashboard/img-4.png"/>
+                                        </image>
+                                    </ImageView>
+                                </children>
+                            </Pane>
+                        </children>
+                    </VBox>
+
+                    <!-- Settings View -->
+                    <VBox fx:id="settingsView" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0"
+                          visible="false">
+                        <children>
+                            <Pane prefHeight="300.0" prefWidth="600.0"
+                                  style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 3, 3);">
+                                <children>
+                                    <Label layoutX="40.0" layoutY="30.0" text="Settings" textFill="#333333">
+                                        <font>
+                                            <Font name="System Bold" size="22.0"/>
+                                        </font>
+                                    </Label>
+                                    <Label layoutX="40.0" layoutY="80.0"
+                                           text="This section would contain various application settings like user preferences, notification settings, etc."
+                                           textFill="#666666" wrapText="true">
+                                        <font>
+                                            <Font name="System Regular" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                </children>
+                            </Pane>
+                        </children>
+                    </VBox>
+
+                    <!-- Add Item View -->
+                    <VBox fx:id="addItemView" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0"
+                          visible="false">
+                        <children>
+                            <Pane prefHeight="580.0" prefWidth="550.0"
+                                  style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 3, 3);">
+                                <children>
+                                    <Label layoutX="40.0" layoutY="30.0" text="Add New Item" textFill="#333333">
+                                        <font>
+                                            <Font name="System Bold" size="22.0"/>
+                                        </font>
+                                    </Label>
+
+                                    <Label layoutX="40.0" layoutY="90.0" text="Item Name" textFill="#4a4a4a">
+                                        <font>
+                                            <Font name="System Medium" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="itemNameField" layoutX="40.0" layoutY="115.0" prefHeight="35.0"
+                                               prefWidth="220.0" promptText="e.g., Men's Classic T-Shirt"
+                                               style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+
+                                    <Label layoutX="40.0" layoutY="170.0" text="Category" textFill="#4a4a4a">
+                                        <font>
+                                            <Font name="System Medium" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <ComboBox fx:id="itemCategoryComboBox" layoutX="40.0" layoutY="195.0"
+                                              prefHeight="35.0" prefWidth="220.0" promptText="Select a category"
+                                              style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+
+                                    <Label layoutX="40.0" layoutY="250.0" text="Size" textFill="#4a4a4a">
+                                        <font>
+                                            <Font name="System Medium" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <ComboBox fx:id="itemSizeComboBox" layoutX="40.0" layoutY="275.0" prefHeight="35.0"
+                                              prefWidth="220.0" promptText="Select a size"
+                                              style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+
+                                    <Label layoutX="290.0" layoutY="90.0" text="Price" textFill="#4a4a4a">
+                                        <font>
+                                            <Font name="System Medium" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="itemPriceField" layoutX="290.0" layoutY="115.0" prefHeight="35.0"
+                                               prefWidth="220.0" promptText="e.g., 29.99"
+                                               style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+
+                                    <Label layoutX="290.0" layoutY="170.0" text="Quantity" textFill="#4a4a4a">
+                                        <font>
+                                            <Font name="System Medium" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="itemQuantityField" layoutX="290.0" layoutY="195.0"
+                                               prefHeight="35.0" prefWidth="220.0" promptText="e.g., 100"
+                                               style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+
+                                    <Label layoutX="290.0" layoutY="250.0" text="Supplier" textFill="#4a4a4a">
+                                        <font>
+                                            <Font name="System Medium" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <ComboBox fx:id="supplierComboBox" layoutX="290.0" layoutY="275.0" prefHeight="35.0"
+                                              prefWidth="220.0" promptText="Select a supplier"
+                                              style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+
+                                    <Label layoutX="40.0" layoutY="330.0" text="Item Description" textFill="#4a4a4a">
+                                        <font>
+                                            <Font name="System Medium" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <Button fx:id="generateDescriptionBtn" layoutX="190.0" layoutY="325.0"
+                                            mnemonicParsing="false" onAction="#generateItemDescription"
+                                            prefHeight="30.0"
+                                            style="-fx-background-color: #9c27b0; -fx-background-radius: 8px;"
+                                            text="Generate with AI ✨" textFill="WHITE">
+                                        <font>
+                                            <Font name="System Bold" size="12.0"/>
+                                        </font>
+                                    </Button>
+                                    <TextArea fx:id="itemDescriptionArea" layoutX="40.0" layoutY="365.0"
+                                              prefHeight="100.0" prefWidth="470.0"
+                                              promptText="A compelling description generated by AI..."
+                                              style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"
+                                              wrapText="true"/>
+                                    <Label fx:id="descriptionErrorLabel" layoutX="40.0" layoutY="470.0"
+                                           textFill="#dc3545" visible="false"/>
+
+                                    <Button layoutX="40.0" layoutY="495.0" mnemonicParsing="false"
+                                            onAction="#handleAddItemSubmit" prefHeight="40.0" prefWidth="470.0"
+                                            styleClass="button-primary"
+                                            text="Add Item to Inventory" textFill="WHITE">
+                                        <font>
+                                            <Font name="System Bold" size="16.0"/>
+                                        </font>
+                                    </Button>
+                                    <Pane layoutX="590.0" layoutY="21.0" prefHeight="529.0" prefWidth="416.0"
+                                          style="-fx-border-color: black; -fx-border-radius: 25px;">
+                                        <children>
+                                            <ImageView fitHeight="529.0" fitWidth="411.0" layoutX="5.0"
+                                                       pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@../img/signup-form/img-2.png"/>
+                                                </image>
+                                            </ImageView>
+                                        </children>
+                                    </Pane>
+                                </children>
+                            </Pane>
+                        </children>
+                    </VBox>
+                </StackPane>
+            </children>
+        </AnchorPane>
+    </center>
+    <stylesheets>
+        <String fx:value="/css/dashboard.css"/>
+    </stylesheets>
 </BorderPane>

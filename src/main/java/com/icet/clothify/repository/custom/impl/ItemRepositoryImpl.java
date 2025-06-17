@@ -76,7 +76,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
         ResultSetHandler<List<ItemDAO>> handler = new BeanListHandler<>(ItemDAO.class);
         try {
-            return runner.query(connection, "SELECT * FROM item", handler);
+            return runner.query(connection, "SELECT * FROM items", handler);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
