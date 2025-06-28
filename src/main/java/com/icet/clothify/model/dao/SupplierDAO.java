@@ -1,7 +1,11 @@
 package com.icet.clothify.model.dao;
 
+import jakarta.persistence.*;
 import lombok.*;
 
+
+@Entity
+@Table(name = "suppliers")
 @Setter
 @Getter
 @ToString
@@ -9,7 +13,9 @@ import lombok.*;
 @NoArgsConstructor
 public class SupplierDAO {
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private String company;
     private String email;

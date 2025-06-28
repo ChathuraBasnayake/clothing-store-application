@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1"
+      fx:controller="com.icet.clothify.controller.SettingsController">
+    <children>
+        <Pane prefHeight="300.0" prefWidth="600.0"
+              style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 3, 3);">
+            <children>
+                <Label layoutX="40.0" layoutY="30.0" text="Application Settings" textFill="#333333">
+                    <font>
+                        <Font name="System Bold" size="22.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="40.0" layoutY="80.0"
+                       text="This section is a placeholder for future application settings, such as user preferences, theme selection, notification settings, and database connection configurations."
+                       textFill="#666666" wrapText="true" prefWidth="520.0">
+                    <font>
+                        <Font name="System Regular" size="14.0"/>
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+    </children>
+</VBox>

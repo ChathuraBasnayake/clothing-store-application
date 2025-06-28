@@ -1,55 +1,119 @@
 package com.icet.clothify.repository.custom.impl;
 
-import com.icet.clothify.DataBase.DataBase;
+import com.icet.clothify.hibernateUtil.HibernateUtil;
 import com.icet.clothify.model.dao.UserDAO;
 import com.icet.clothify.repository.custom.UserRepository;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class UserRepositoryImpl implements UserRepository {
 
-    private final Connection connection = DataBase.getInstance().getConnection();
-    private final QueryRunner runner = new QueryRunner();
 
     public UserRepositoryImpl() throws SQLException {
     }
 
     @Override
     public boolean add(UserDAO dao) throws SQLException {
-        return runner.update(connection, "INSERT INTO user (name, company, email, password, isEmployee) VALUES (?, ?, ?, ?, ?)", dao.getName(), dao.getCompany(), dao.getEmail(), dao.getPassword(), dao.getIsEmployee()) > 0;
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
+            transaction = session.beginTransaction();
+            session.persist(dao);
+            transaction.commit();
+            return true;
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean delete(String id) throws SQLException {
-        return runner.update(connection, "DELETE FROM user WHERE id = ?", Integer.parseInt(id)) > 0;
+        Transaction transaction = null;
+
+        try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
+            transaction = session.beginTransaction();
+            session.remove(session.find(UserDAO.class, id));
+            transaction.commit();
+            return true;
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean update(UserDAO dao) throws SQLException {
-        return runner.update(connection, "UPDATE user SET name = ?, company = ?, email = ?, password = ?, isEmployee = ? WHERE id = ?", dao.getName(), dao.getCompany(), dao.getEmail(), dao.getPassword(), dao.getIsEmployee(), dao.getId()) > 0;
-    }
+        Transaction transaction = null;
 
-    @Override
-    public UserDAO searchById(String id) throws SQLException {
-        ResultSetHandler<UserDAO> handler = new BeanHandler<>(UserDAO.class);
-        return runner.query(connection, "SELECT * FROM user WHERE id = ?", handler, Integer.parseInt(id));
+        try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
+            transaction = session.beginTransaction();
+            session.merge(dao);
+            transaction.commit();
+            return true;
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public List<UserDAO> getAll() throws SQLException {
-        ResultSetHandler<List<UserDAO>> handler = new BeanListHandler<>(UserDAO.class);
-        return runner.query(connection, "SELECT * FROM user", handler);
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
+            transaction = session.beginTransaction();
+            String hql = "FROM UserDAO";
+            List<UserDAO> list = session.createQuery(hql, UserDAO.class).list();
+            transaction.commit();
+            return list;
+        } catch (HibernateException e) {
+            transaction.rollback();
+            throw e;
+        }
+    }
+
+    @Override
+    public UserDAO searchById(String id) throws SQLException {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
+            transaction = session.beginTransaction();
+            UserDAO userDAO = (UserDAO) session.byId(id);
+            transaction.commit();
+            return userDAO;
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public UserDAO searchByEmail(String email) throws SQLException {
-        ResultSetHandler<UserDAO> handler = new BeanHandler<>(UserDAO.class);
-        return runner.query(connection, "SELECT * FROM user WHERE email = ?", handler, email);
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
+            transaction = session.beginTransaction();
+            String hql = "FROM UserDAO WHERE email = :email";
+            UserDAO userDAO = session.createQuery(hql, UserDAO.class)
+                    .setParameter("email", email)
+                    .uniqueResult();
+            transaction.commit();
+            return userDAO;
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            throw e;
+        }
     }
 }

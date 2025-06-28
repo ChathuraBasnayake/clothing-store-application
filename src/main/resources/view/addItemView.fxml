@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0"
+      xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.icet.clothify.controller.AddItemController">
+    <children>
+        <Pane prefHeight="580.0" prefWidth="1050.0"
+              style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.5, 3, 3);">
+            <children>
+                <Label layoutX="40.0" layoutY="30.0" text="Add New Item" textFill="#333333">
+                    <font>
+                        <Font name="System Bold" size="22.0"/>
+                    </font>
+                </Label>
+
+                <Label layoutX="40.0" layoutY="90.0" text="Item Name" textFill="#4a4a4a">
+                    <font>
+                        <Font name="System Medium" size="14.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="itemNameField" layoutX="40.0" layoutY="115.0" prefHeight="35.0" prefWidth="220.0"
+                           promptText="e.g., Men's Classic T-Shirt"
+                           style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+
+                <Label layoutX="40.0" layoutY="170.0" text="Category" textFill="#4a4a4a">
+                    <font>
+                        <Font name="System Medium" size="14.0"/>
+                    </font>
+                </Label>
+                <ComboBox fx:id="itemCategoryComboBox" layoutX="40.0" layoutY="195.0" prefHeight="35.0"
+                          prefWidth="220.0" promptText="Select a category"
+                          style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+
+                <Label layoutX="40.0" layoutY="250.0" text="Size" textFill="#4a4a4a">
+                    <font>
+                        <Font name="System Medium" size="14.0"/>
+                    </font>
+                </Label>
+                <ComboBox fx:id="itemSizeComboBox" layoutX="40.0" layoutY="275.0" prefHeight="35.0" prefWidth="220.0"
+                          promptText="Select a size"
+                          style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+
+                <Label layoutX="290.0" layoutY="90.0" text="Price" textFill="#4a4a4a">
+                    <font>
+                        <Font name="System Medium" size="14.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="itemPriceField" layoutX="290.0" layoutY="115.0" prefHeight="35.0" prefWidth="220.0"
+                           promptText="e.g., 29.99"
+                           style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+
+                <Label layoutX="290.0" layoutY="170.0" text="Quantity" textFill="#4a4a4a">
+                    <font>
+                        <Font name="System Medium" size="14.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="itemQuantityField" layoutX="290.0" layoutY="195.0" prefHeight="35.0"
+                           prefWidth="220.0" promptText="e.g., 100"
+                           style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+
+                <Label layoutX="290.0" layoutY="250.0" text="Supplier" textFill="#4a4a4a">
+                    <font>
+                        <Font name="System Medium" size="14.0"/>
+                    </font>
+                </Label>
+                <ComboBox fx:id="supplierComboBox" layoutX="290.0" layoutY="275.0" prefHeight="35.0"
+                          prefWidth="220.0" promptText="Select a supplier"
+                          style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"/>
+
+                <Label layoutX="40.0" layoutY="330.0" text="Item Description" textFill="#4a4a4a">
+                    <font>
+                        <Font name="System Medium" size="14.0"/>
+                    </font>
+                </Label>
+                <Button fx:id="generateDescriptionBtn" layoutX="190.0" layoutY="325.0"
+                        onAction="#generateItemDescription" prefHeight="30.0"
+                        style="-fx-background-color: #9c27b0; -fx-background-radius: 8px;"
+                        text="Generate with AI ✨" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="12.0"/>
+                    </font>
+                </Button>
+                <TextArea fx:id="itemDescriptionArea" layoutX="40.0" layoutY="365.0" prefHeight="100.0"
+                          prefWidth="470.0" promptText="A compelling description generated by AI..."
+                          style="-fx-background-radius: 8px; -fx-border-color: #e0e0e0; -fx-border-radius: 8px;"
+                          wrapText="true"/>
+                <Label fx:id="descriptionErrorLabel" layoutX="40.0" layoutY="470.0" textFill="#dc3545" visible="false"/>
+
+                <Button layoutX="40.0" layoutY="495.0" onAction="#handleAddItemSubmit" prefHeight="40.0"
+                        prefWidth="470.0" styleClass="button-primary" text="Add Item to Inventory" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="16.0"/>
+                    </font>
+                </Button>
+                <Pane layoutX="590.0" layoutY="21.0" prefHeight="529.0" prefWidth="416.0"
+                      style="-fx-border-color: black; -fx-border-radius: 25px;">
+                    <children>
+                        <ImageView fitHeight="529.0" fitWidth="411.0" layoutX="5.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@../img/signup-form/img-2.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </Pane>
+            </children>
+        </Pane>
+    </children>
+</VBox>

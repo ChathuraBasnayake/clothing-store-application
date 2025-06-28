@@ -18,7 +18,10 @@ public class UserServiceImpl implements UserService {
 
     ModelMapper modelMapper = new ModelMapper();
 
+
     public UserServiceImpl() throws SQLException {
+
+
     }
 
     @Override
@@ -56,7 +59,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isAdmin(String email) throws SQLException {
         UserDTO userDTO = searchByEmail(email);
-        return userDTO == null ? false : userDTO.getIsEmployee();
+        return userDTO != null && userDTO.getIsEmployee();
     }
 
     @Override

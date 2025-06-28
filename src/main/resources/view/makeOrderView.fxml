@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="15.0" style="-fx-background-color: transparent;"
+      xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.icet.clothify.controller.MakeOrderController">
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+    </padding>
+    <children>
+        <Label text="Create New Order" textFill="#333333">
+            <font>
+                <Font name="System Bold" size="24.0"/>
+            </font>
+        </Label>
+        <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+            <children>
+                <VBox prefWidth="600.0" spacing="15.0" styleClass="form-container" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label text="Add Items to Order">
+                            <font>
+                                <Font name="System Bold" size="16.0"/>
+                            </font>
+                        </Label>
+                        <HBox alignment="BOTTOM_LEFT" spacing="10.0">
+                            <children>
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <Label text="Search Item" textFill="#4a4a4a"/>
+                                        <ComboBox fx:id="orderItemComboBox" prefHeight="35.0" prefWidth="400.0"
+                                                  promptText="Type to search for an item..." styleClass="form-field"/>
+                                    </children>
+                                </VBox>
+                                <VBox>
+                                    <children>
+                                        <Label text="Quantity" textFill="#4a4a4a"/>
+                                        <TextField fx:id="orderItemQtyField" prefHeight="35.0" prefWidth="80.0"
+                                                   promptText="1" styleClass="form-field" text="1"/>
+                                    </children>
+                                </VBox>
+                                <Button onAction="#handleAddToOrder" prefHeight="35.0" prefWidth="100.0"
+                                        styleClass="button-primary" text="Add"/>
+                            </children>
+                        </HBox>
+                        <TableView fx:id="orderItemsTableView" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="colItemName" prefWidth="250.0" text="Item Name"/>
+                                <TableColumn fx:id="colItemQty" prefWidth="70.0" text="Quantity"/>
+                                <TableColumn fx:id="colItemPrice" prefWidth="100.0" text="Unit Price"/>
+                                <TableColumn fx:id="colItemTotal" prefWidth="100.0" text="Total"/>
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                            </columnResizePolicy>
+                        </TableView>
+                        <Button onAction="#handleRemoveSelectedItem" prefHeight="35.0" styleClass="button-danger"
+                                text="Remove Selected Item"/>
+                    </children>
+                </VBox>
+                <VBox prefWidth="350.0" spacing="15.0" styleClass="form-container">
+                    <children>
+                        <Label text="Order Summary">
+                            <font>
+                                <Font name="System Bold" size="16.0"/>
+                            </font>
+                        </Label>
+                        <GridPane vgap="10.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <children>
+                                <VBox>
+                                    <children>
+                                        <Label text="Order ID" textFill="#4a4a4a"/>
+                                        <TextField fx:id="orderIdField" disable="true" promptText="Auto-Generated"
+                                                   styleClass="form-field"/>
+                                    </children>
+                                </VBox>
+                                <VBox GridPane.rowIndex="1">
+                                    <children>
+                                        <Label text="Payment Method" textFill="#4a4a4a"/>
+                                        <ComboBox fx:id="orderPaymentMethodComboBox" prefHeight="26.0"
+                                                  prefWidth="350.0" promptText="Select Method"
+                                                  styleClass="form-field"/>
+                                    </children>
+                                </VBox>
+                                <VBox GridPane.rowIndex="2">
+                                    <children>
+                                        <Label text="Processing Employee" textFill="#4a4a4a"/>
+                                        <ComboBox fx:id="orderEmployeeComboBox" prefHeight="26.0" prefWidth="350.0"
+                                                  promptText="Select Employee" styleClass="form-field"/>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </GridPane>
+                        <Separator/>
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <Label text="GRAND TOTAL" textFill="#333333">
+                                    <font>
+                                        <Font name="System Bold" size="18.0"/>
+                                    </font>
+                                </Label>
+                                <Label fx:id="orderTotalLabel" alignment="CENTER_RIGHT"
+                                       maxWidth="1.7976931348623157E308" text="LKR 0.00" textFill="#1b56fd"
+                                       HBox.hgrow="ALWAYS">
+                                    <font>
+                                        <Font name="System Bold" size="24.0"/>
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <Button onAction="#handlePlaceOrder" prefHeight="45.0" prefWidth="Infinity"
+                                styleClass="button-success" text="Place Order">
+                            <font>
+                                <Font name="System Bold" size="19.0"/>
+                            </font>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</VBox>

@@ -1,6 +1,5 @@
 package com.icet.clothify.model.dto;
 
-import com.icet.clothify.controller.DashboardController;
 import lombok.*;
 
 import java.util.List;
@@ -13,10 +12,9 @@ import java.util.List;
 public class OrderDTO {
 
     private String id;
-    private List<DashboardController.OrderItem> orderItems;
+    private List<OrderItemDTO> orderItems;
     private Double total;
     private String paymentMethod;
     private String employeeId;
-
 
 }

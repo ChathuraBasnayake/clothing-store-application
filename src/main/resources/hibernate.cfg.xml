@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- JDBC settings -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+
+
+        <property name="hibernate.connection.url">
+            jdbc:mysql://localhost:3307/clothing_store?createDatabaseIfNotExist=true
+        </property>
+
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">2007</property>
+
+        <!-- Hibernate behavior -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <!-- Mappings -->
+        <mapping class="com.icet.clothify.model.dao.UserDAO"/>
+        <mapping class="com.icet.clothify.model.dao.SupplierDAO"/>
+        <mapping class="com.icet.clothify.model.dao.ItemDAO"/>
+        <mapping class="com.icet.clothify.model.dao.OrderDAO"/>
+        <mapping class="com.icet.clothify.model.dao.OrderItemDAO"/>
+
+    </session-factory>
+</hibernate-configuration>

@@ -1,7 +1,14 @@
 package com.icet.clothify.service.custom;
 
+import com.icet.clothify.controller.MakeOrderController;
+import com.icet.clothify.model.dto.ItemDTO;
 import com.icet.clothify.model.dto.OrderDTO;
+import com.icet.clothify.model.dto.UserDTO;
 import com.icet.clothify.service.SuperService;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,4 +23,11 @@ public interface OrderService extends SuperService {
 
     OrderDTO searchById(String id) throws SQLException;
 
+    public String generateOrderId();
+
+    boolean validateAddToTheOrder(ItemDTO selectedItem, TextField orderItemQtyField);
+
+    void updateOrderTotal(ObservableList<MakeOrderController.OrderItem> currentOrderItems, Label orderTotalLabel);
+
+    boolean handlePlaceOrderValidations(ObservableList<MakeOrderController.OrderItem> currentOrderItems, ComboBox<String> orderPaymentMethodComboBox, ComboBox<UserDTO> orderEmployeeComboBox);
 }

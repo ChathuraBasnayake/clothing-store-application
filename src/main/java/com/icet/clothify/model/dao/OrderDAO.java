@@ -1,10 +1,12 @@
 package com.icet.clothify.model.dao;
 
-import com.icet.clothify.controller.DashboardController;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
 
+@Entity
+@Table(name = "Orders")
 @Setter
 @Getter
 @ToString
@@ -12,10 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderDAO {
 
+    @Id
     private String id;
-    private List<DashboardController.OrderItem> orderItems;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<OrderItemDAO> orderItems;
+
     private Double total;
     private String paymentMethod;
     private String employeeId;
-
 }
