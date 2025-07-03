@@ -1,20 +1,34 @@
 package com.icet.clothify.controller;
 
-import com.icet.clothify.service.ServiceFactory;
+import com.google.inject.Inject;
+import com.icet.clothify.model.dto.OrderDTO;
 import com.icet.clothify.service.custom.ItemService;
+import com.icet.clothify.service.custom.OrderService;
 import com.icet.clothify.service.custom.UserService;
-import com.icet.clothify.util.ServiceType;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
-import static com.icet.clothify.util.Util.alert;
+import static com.icet.clothify.util.AlertUtil.alert;
 
 public class HomeController {
 
+    //<editor-fold desc="FXML Fields">
     @FXML
     private Label totalSalesLabel;
     @FXML
@@ -25,42 +39,105 @@ public class HomeController {
     private BarChart<String, Number> salesChart;
     @FXML
     private ListView<String> activityListView;
+    @FXML
+    private CategoryAxis xAxis; // The FXML variable for the BarChart's X-Axis
+    //</editor-fold>
 
+    @Inject
     private ItemService itemService;
+    @Inject
     private UserService userService;
-    // You would also have an OrderService to get total sales and chart data
+    @Inject
+    private OrderService orderService;
 
     @FXML
     public void initialize() {
-        try {
-            itemService = ServiceFactory.getInstance().getServiceType(ServiceType.ITEM);
-            userService = ServiceFactory.getInstance().getServiceType(ServiceType.USER);
-            // orderService = ServiceFactory.getInstance().getServiceType(ServiceType.ORDER);
-        } catch (SQLException e) {
-            alert(javafx.scene.control.Alert.AlertType.ERROR, "Initialization Failed", "Could not connect to services.");
-            e.printStackTrace();
-        }
+        // Load data when the view is first created
         refreshData();
     }
 
     /**
-     * This public method can be called from the DashboardController to update the view
-     * when it becomes visible.
+     * This public method is called by the main DashboardController to update
+     * the view whenever it is shown.
      */
     public void refreshData() {
+        if (orderService == null || userService == null || itemService == null) {
+            return;
+        }
         System.out.println("Refreshing Home View data...");
         loadStatCards();
-        // In a real app, you would load chart and activity data here as well.
+        loadSalesBarChart();
+        loadRecentActivity();
     }
 
+    /**
+     * Fetches data for the top statistic cards.
+     */
     private void loadStatCards() {
         try {
             noUsersLabel.setText(String.valueOf(userService.getAll().size()));
-            noItemsLabel.setText(String.valueOf(itemService.getAll().size()));
-            // totalSalesLabel would be populated from the OrderService
-            totalSalesLabel.setText("$12,345"); // Placeholder
+            noItemsLabel.setText(String.valueOf(itemService.getItemCount()));
+            double totalSales = orderService.getTotalSalesAmount();
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "LK"));
+            totalSalesLabel.setText(currencyFormat.format(totalSales));
         } catch (SQLException e) {
-            alert(javafx.scene.control.Alert.AlertType.ERROR, "Data Error", "Could not load statistics.");
+            alert(Alert.AlertType.ERROR, "Data Error", "Could not load dashboard statistics.");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Fetches and displays data for the monthly sales Bar Chart, correctly
+     * setting the categories on the injected xAxis.
+     */
+    private void loadSalesBarChart() {
+        try {
+            Map<String, Double> monthlySales = orderService.getMonthlySales(3);
+
+            System.out.println("Fetched Monthly Sales Data for Chart: " + monthlySales);
+            if (monthlySales == null || monthlySales.isEmpty()) {
+                System.out.println("No monthly sales data found to display in the chart.");
+                Platform.runLater(() -> salesChart.setData(FXCollections.observableArrayList()));
+                return;
+            }
+
+            xAxis.setCategories(FXCollections.observableArrayList(monthlySales.keySet()));
+
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName("Sales in LKR");
+            monthlySales.forEach((month, sales) -> {
+                series.getData().add(new XYChart.Data<>(month, sales));
+            });
+
+            ObservableList<XYChart.Series<String, Number>> barChartData = FXCollections.observableArrayList(series);
+
+            Platform.runLater(() -> {
+                salesChart.setData(barChartData);
+            });
+
+        } catch (SQLException e) {
+            alert(Alert.AlertType.ERROR, "Chart Error", "Could not load monthly sales data for the chart.");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Fetches and displays a list of recent activities.
+     */
+    private void loadRecentActivity() {
+        try {
+            List<String> activities = new ArrayList<>();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, hh:mm a");
+            List<OrderDTO> recentOrders = orderService.getRecentOrders(3);
+            for (OrderDTO order : recentOrders) {
+                activities.add(String.format("Order #%s placed (%s)",
+                        order.getId(),
+                        order.getOrderDate().format(formatter))
+                );
+            }
+            activityListView.setItems(FXCollections.observableArrayList(activities));
+        } catch (SQLException e) {
+            alert(Alert.AlertType.ERROR, "Activity Error", "Could not load recent activities.");
             e.printStackTrace();
         }
     }

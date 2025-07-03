@@ -20,11 +20,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
-import static com.icet.clothify.util.Util.alert;
+import static com.icet.clothify.util.AlertUtil.alert;
 
 public class DashboardController {
 
-    //<editor-fold desc="FXML Fields for the Main Shell">
     @FXML
     private Label titleLabel;
     @FXML
@@ -43,9 +42,9 @@ public class DashboardController {
     private Button addItemBtn;
     @FXML
     private Button logoutBtn;
-    //</editor-fold>
+    @FXML
+    private Button reportsBtn;
 
-    //<editor-fold desc="FXML Fields for Included Views (Nodes)">
     @FXML
     private Node homeView;
     @FXML
@@ -57,73 +56,55 @@ public class DashboardController {
     @FXML
     private Node settingsView;
     @FXML
-    private Node addItemView;
-    //</editor-fold>
+    private Node inventoryManagement;
+    @FXML
+    private Node reportsView;
 
-    //<editor-fold desc="FXML Fields for Included View Controllers">
-    // This uses the "controller injection" convention.
-    // The field name must be the fx:id of the <fx:include> tag + "Controller".
     @FXML
     private HomeController homeViewController;
     @FXML
     private MakeOrderController makeOrderViewController;
     @FXML
-    private AddUserController addUserController;
-    @FXML
-    private AddSupplierController addSupplierViewController;
-    @FXML
-    private SettingsController settingsViewController;
-    @FXML
-    private AddItemController addItemViewController;
-    //</editor-fold>
+    private InventoryManagementController inventoryManagementController;
 
     private List<Node> views;
 
     @FXML
     public void initialize() {
 
-
-        // Set up the live clock in the header
         setupLiveClock();
 
-        // Group all view nodes for easy management (show/hide)
-        views = List.of(homeView, addSupplierView, makeOrderView, addUserView, settingsView, addItemView);
+        views = List.of(homeView, addSupplierView, makeOrderView, addUserView, settingsView, inventoryManagement, reportsView);
 
-        // Show the home view by default when the application starts
         showView(homeView, "Dashboard");
+
+
     }
 
-    /**
-     * Handles all sidebar navigation button clicks to switch between views.
-     */
     @FXML
     void handleNavigation(ActionEvent event) {
         Object source = event.getSource();
 
         if (source == homeBtn) {
             showView(homeView, "Dashboard");
-            homeViewController.refreshData(); // Call a public method on the specific controller
+            homeViewController.refreshData();
         } else if (source == makeOrderBtn) {
             showView(makeOrderView, "Make New Order");
-            makeOrderViewController.initializeData(); // Prepare the order form
+            makeOrderViewController.initializeData();
         } else if (source == addUserBtn) {
             showView(addUserView, "Add New User");
-//            addUserController.clearFields(); // Reset the user form
         } else if (source == addSupplierBtn) {
             showView(addSupplierView, "Add New Supplier");
-//            addSupplierViewController.clearFields(); // Reset the supplier form
         } else if (source == settingsBtn) {
             showView(settingsView, "Settings");
-            // No specific action needed for the settings placeholder view
         } else if (source == addItemBtn) {
-            showView(addItemView, "Add New Item");
-            addItemViewController.initializeData(); // Prepare the item form
+            showView(inventoryManagement, "Add New Item");
+            inventoryManagementController.initializeData();
+        } else if (source == reportsBtn) { // Handle new button click
+            showView(reportsView, "Reports & Analytics");
         }
     }
 
-    /**
-     * Handles the logout process.
-     */
     @FXML
     void handleLogout(ActionEvent event) {
         try {
@@ -134,7 +115,6 @@ public class DashboardController {
             stage.setResizable(false);
             stage.show();
 
-            // Close the current dashboard window
             ((Stage) logoutBtn.getScene().getWindow()).close();
 
         } catch (IOException e) {
@@ -143,22 +123,14 @@ public class DashboardController {
         }
     }
 
-    /**
-     * A helper method to make the requested view visible and hide all others.
-     *
-     * @param viewToShow The Node (the root of an included FXML) to display.
-     * @param title      The title to set in the header bar.
-     */
+
     private void showView(Node viewToShow, String title) {
         titleLabel.setText(title);
-        views.forEach(view -> view.setVisible(false)); // Hide all views
-        viewToShow.setVisible(true); // Show the target view
-        viewToShow.toFront(); // Bring it to the front of the StackPane
+        views.forEach(view -> view.setVisible(false));
+        viewToShow.setVisible(true);
+        viewToShow.toFront();
     }
 
-    /**
-     * Sets up a timeline to update the date and time label every second.
-     */
     private void setupLiveClock() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, h:mm:ss a");
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {

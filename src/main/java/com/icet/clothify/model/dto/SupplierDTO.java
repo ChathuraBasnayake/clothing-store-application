@@ -13,6 +13,7 @@ public class SupplierDTO {
     private String name;
     private String company;
     private String email;
-    private String item;
+    private String mobileNO;
+
 
 }

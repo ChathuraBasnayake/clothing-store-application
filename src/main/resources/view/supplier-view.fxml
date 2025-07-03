@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The root AnchorPane makes the entire view responsive -->
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="540.0" prefWidth="600.0"
+            style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21"
+            fx:controller="com.icet.clothify.controller.SupplierManagementController">
+    <children>
+        <!-- The TabPane is anchored to fill the entire window -->
+        <TabPane tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <!-- Tab 1: Add Supplier -->
+                <Tab text="Add Supplier">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <!-- This VBox now contains the shadow effect and is anchored to its parent -->
+                                <VBox alignment="TOP_CENTER" spacing="20.0"
+                                      style="-fx-background-color: white; -fx-background-radius: 10;"
+                                      AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+                                      AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                    <effect>
+                                        <DropShadow blurType="GAUSSIAN" height="20" offsetY="3.0" radius="9.5"
+                                                    width="20">
+                                            <color>
+                                                <Color opacity="0.1"/>
+                                            </color>
+                                        </DropShadow>
+                                    </effect>
+                                    <children>
+                                        <Label text="Add New Supplier" textFill="#333333">
+                                            <font>
+                                                <Font name="System Bold" size="24.0"/>
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="10.0"/>
+                                            </VBox.margin>
+                                        </Label>
+                                        <!-- Form fields are in HBoxes, and their parent VBoxes are set to grow -->
+                                        <HBox spacing="30.0">
+                                            <children>
+                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Supplier Name" textFill="#4a4a4a"/>
+                                                        <TextField fx:id="supplierNameField" prefHeight="40.0"
+                                                                   promptText="e.g., Prime Textiles"
+                                                                   styleClass="form-field"/>
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Company" textFill="#4a4a4a"/>
+                                                        <TextField fx:id="supplierCompanyField" prefHeight="40.0"
+                                                                   promptText="e.g., Prime Textiles (Pvt) Ltd"
+                                                                   styleClass="form-field"/>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                        <HBox spacing="30.0">
+                                            <children>
+                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Email Address" textFill="#4a4a4a"/>
+                                                        <TextField fx:id="supplierEmailField" prefHeight="40.0"
+                                                                   promptText="e.g., contact@primetextiles.com"
+                                                                   styleClass="form-field"/>
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Phone Number" textFill="#4a4a4a"/>
+                                                        <TextField fx:id="supplierPhoneField" prefHeight="40.0"
+                                                                   promptText="e.g., 0771234567"
+                                                                   styleClass="form-field"/>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                        <Pane VBox.vgrow="ALWAYS"/>
+                                        <Button onAction="#handleSaveSupplier" prefHeight="45.0" maxWidth="Infinity"
+                                                styleClass="button-primary" text="Save Supplier">
+                                            <font>
+                                                <Font name="System Bold" size="16.0"/>
+                                            </font>
+                                        </Button>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <!-- Tab 2: Update Supplier -->
+                <Tab text="Update Supplier">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <VBox alignment="TOP_CENTER" spacing="20.0"
+                                      style="-fx-background-color: white; -fx-background-radius: 10;"
+                                      AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+                                      AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                    <effect>
+                                        <DropShadow blurType="GAUSSIAN" height="20" offsetY="3.0" radius="9.5"
+                                                    width="20">
+                                            <color>
+                                                <Color opacity="0.1"/>
+                                            </color>
+                                        </DropShadow>
+                                    </effect>
+                                    <children>
+                                        <Label text="Update Supplier Information" textFill="#333333">
+                                            <font>
+                                                <Font name="System Bold" size="24.0"/>
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="10.0"/>
+                                            </VBox.margin>
+                                        </Label>
+                                        <VBox spacing="5.0">
+                                            <children>
+                                                <Label text="Select Supplier to Update" textFill="#4a4a4a"/>
+                                                <ComboBox fx:id="updateSupplierComboBox" prefHeight="40.0"
+                                                          maxWidth="Infinity" promptText="Click to select a supplier"
+                                                          styleClass="form-field"/>
+                                            </children>
+                                        </VBox>
+                                        <Separator prefWidth="200.0"/>
+                                        <HBox spacing="30.0">
+                                            <children>
+                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Supplier ID" textFill="#4a4a4a"/>
+                                                        <TextField fx:id="updateSupplierIdField" editable="false"
+                                                                   prefHeight="40.0" styleClass="form-field-disabled"/>
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Supplier Name" textFill="#4a4a4a"/>
+                                                        <TextField fx:id="updateSupplierNameField" prefHeight="40.0"
+                                                                   styleClass="form-field"/>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                        <HBox spacing="30.0">
+                                            <children>
+                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Company" textFill="#4a4a4a"/>
+                                                        <TextField fx:id="updateSupplierCompanyField" prefHeight="40.0"
+                                                                   styleClass="form-field"/>
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Phone Number" textFill="#4a4a4a"/>
+                                                        <TextField fx:id="updateSupplierPhoneField" prefHeight="40.0"
+                                                                   styleClass="form-field"/>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                        <VBox spacing="5.0">
+                                            <children>
+                                                <Label text="Email Address" textFill="#4a4a4a"/>
+                                                <TextField fx:id="updateSupplierEmailField" prefHeight="40.0"
+                                                           styleClass="form-field"/>
+                                            </children>
+                                        </VBox>
+                                        <Button onAction="#handleUpdateSupplier" prefHeight="45.0" maxWidth="Infinity"
+                                                styleClass="button-primary" text="Update Supplier">
+                                            <font>
+                                                <Font name="System Bold" size="16.0"/>
+                                            </font>
+                                        </Button>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <!-- Tab 3: Delete Supplier -->
+                <Tab text="Delete Supplier">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <VBox alignment="TOP_CENTER" spacing="20.0"
+                                      style="-fx-background-color: white; -fx-background-radius: 10;"
+                                      AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+                                      AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                    <effect>
+                                        <DropShadow blurType="GAUSSIAN" height="20" offsetY="3.0" radius="9.5"
+                                                    width="20">
+                                            <color>
+                                                <Color opacity="0.1"/>
+                                            </color>
+                                        </DropShadow>
+                                    </effect>
+                                    <children>
+                                        <Label text="Delete Supplier" textFill="#333333">
+                                            <font>
+                                                <Font name="System Bold" size="24.0"/>
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="10.0"/>
+                                            </VBox.margin>
+                                        </Label>
+                                        <VBox spacing="5.0">
+                                            <children>
+                                                <Label text="Select Supplier to Delete" textFill="#4a4a4a"/>
+                                                <ComboBox fx:id="deleteSupplierComboBox" prefHeight="40.0"
+                                                          maxWidth="Infinity" promptText="Click to select a supplier"
+                                                          styleClass="form-field"/>
+                                            </children>
+                                        </VBox>
+                                        <VBox alignment="CENTER"
+                                              style="-fx-background-color: #ffebee; -fx-background-radius: 8;">
+                                            <children>
+                                                <Label text="Warning: This action is permanent and cannot be undone."
+                                                       textFill="#c62828" wrapText="true">
+                                                    <font>
+                                                        <Font name="System Italic" size="13.0"/>
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                                            </padding>
+                                        </VBox>
+                                        <Pane VBox.vgrow="ALWAYS"/>
+                                        <Button onAction="#handleDeleteSupplier" prefHeight="45.0" maxWidth="Infinity"
+                                                styleClass="button-danger" text="Delete Supplier Permanently">
+                                            <font>
+                                                <Font name="System Bold" size="16.0"/>
+                                            </font>
+                                        </Button>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

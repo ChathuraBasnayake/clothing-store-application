@@ -27,6 +27,12 @@
                                 <FontAwesomeIconView glyphName="SHOPPING_CART" size="1.8em"/>
                             </graphic>
                         </Button>
+                        <!-- NEW: Reports Button -->
+                        <Button fx:id="reportsBtn" onAction="#handleNavigation" styleClass="sidebar-button" text=" ">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="BAR_CHART" size="1.8em"/>
+                            </graphic>
+                        </Button>
                         <Button fx:id="addUserBtn" onAction="#handleNavigation" styleClass="sidebar-button" text=" ">
                             <graphic>
                                 <FontAwesomeIconView glyphName="USER_PLUS" size="1.8em"/>
@@ -107,11 +113,16 @@
                            AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
                     <!-- Views are loaded into this StackPane from separate FXML files -->
                     <fx:include fx:id="homeView" source="homeView.fxml"/>
-                    <fx:include fx:id="addSupplierView" source="addSupplierView.fxml" visible="false"/>
+                    <fx:include fx:id="addSupplierView" source="supplier-view.fxml" visible="false"/>
                     <fx:include fx:id="makeOrderView" source="makeOrderView.fxml" visible="false"/>
-                    <fx:include fx:id="addUserView" source="addUserView.fxml" visible="false"/>
+                    <fx:include fx:id="addUserView" source="user-view.fxml" visible="false"/>
                     <fx:include fx:id="settingsView" source="settingsView.fxml" visible="false"/>
-                    <fx:include fx:id="addItemView" source="addItemView.fxml" visible="false"/>
+
+                    <!-- FIX APPLIED HERE: Changed fx:id to make controller injection work with original Java field name -->
+                    <fx:include fx:id="inventoryManagement" source="inventory-view.fxml" visible="false"/>
+
+                    <!-- NEW: Include the reports view -->
+                    <fx:include fx:id="reportsView" source="reportsView.fxml" visible="false"/>
                 </StackPane>
             </children>
         </AnchorPane>

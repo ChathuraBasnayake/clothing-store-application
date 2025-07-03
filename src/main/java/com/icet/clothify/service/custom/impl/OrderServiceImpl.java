@@ -1,15 +1,14 @@
 package com.icet.clothify.service.custom.impl;
 
+import com.google.inject.Inject;
 import com.icet.clothify.controller.MakeOrderController;
 import com.icet.clothify.model.dao.OrderDAO;
 import com.icet.clothify.model.dao.OrderItemDAO;
 import com.icet.clothify.model.dto.ItemDTO;
 import com.icet.clothify.model.dto.OrderDTO;
 import com.icet.clothify.model.dto.UserDTO;
-import com.icet.clothify.repository.DAOFactory;
 import com.icet.clothify.repository.custom.OrderRepository;
 import com.icet.clothify.service.custom.OrderService;
-import com.icet.clothify.util.RepositoryType;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -21,13 +20,14 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
-import static com.icet.clothify.util.Util.alert;
+import static com.icet.clothify.util.AlertUtil.alert;
 
 public class OrderServiceImpl implements OrderService {
 
-    OrderRepository orderRepository = DAOFactory.getInstance().getServices(RepositoryType.ORDER);
+    @Inject
+    OrderRepository orderRepository;
 
     ModelMapper modelMapper = new ModelMapper();
 
@@ -53,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.getAll()
                 .stream()
                 .map(orderDAO -> modelMapper.map(orderDAO, OrderDTO.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -92,7 +92,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean handlePlaceOrderValidations(ObservableList<MakeOrderController.OrderItem> currentOrderItems, ComboBox<String> orderPaymentMethodComboBox, ComboBox<UserDTO> orderEmployeeComboBox) {
+    public boolean handlePlaceOrderValidations(ObservableList<MakeOrderController.OrderItem> currentOrderItems, ComboBox<String> orderPaymentMethodComboBox, ComboBox<UserDTO> orderEmployeeComboBox, TextField customerEmailField) {
         if (currentOrderItems.isEmpty()) {
             alert(Alert.AlertType.WARNING, "Validation Error", "Cannot place an empty order. Please add items.");
             return false;
@@ -105,8 +105,40 @@ public class OrderServiceImpl implements OrderService {
             alert(Alert.AlertType.WARNING, "Validation Error", "Please select a processing employee.");
             return false;
         }
+        String email = customerEmailField.getText().trim();
+        if (email.isEmpty() || !email.matches("^[\\w-_.+]*[\\w-_.]@([\\w]+\\.)+[\\w]+[\\w]$")) {
+            alert(Alert.AlertType.WARNING, "Validation Error", "Please enter a valid email address.");
+            return false;
+        }
 
         return true;
 
     }
+
+    @Override
+    public double getTotalSalesAmount() throws SQLException {
+        return getAll().stream().mapToDouble(OrderDTO::getTotal).sum();
+    }
+
+    @Override
+    public Map<String, Double> getSalesByCategory() throws SQLException {
+        return orderRepository.getSalesByCategory();
+    }
+
+    @Override
+    public Map<String, Double> getMonthlySales(int i) throws SQLException {
+        return orderRepository.getMonthlySales(i);
+    }
+
+    @Override
+    public List<OrderDTO> getRecentOrders(int count) throws SQLException {
+        List<OrderDAO> recentOrders = orderRepository.getRecentOrders(count);
+        System.out.println(recentOrders);
+        return orderRepository.getRecentOrders(count)
+                .stream()
+                .map(orderDAO -> modelMapper.map(orderDAO, OrderDTO.class))
+                .toList();
+    }
+
+
 }

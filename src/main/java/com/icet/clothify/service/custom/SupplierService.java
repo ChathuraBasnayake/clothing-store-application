@@ -22,4 +22,8 @@ public interface SupplierService extends SuperService {
     public boolean validateSupplierInputs(String name, String company, String email);
 
     public void clearAddSupplierForm(List<TextField> textFields);
+
+    public void generateAndShowSuppliersReport() throws SQLException;
+
+    public boolean update(SupplierDTO supplierDTO) throws SQLException;
 }

@@ -1,14 +1,14 @@
 package com.icet.clothify.controller;
 
+import com.google.inject.Inject;
 import com.icet.clothify.model.dto.ItemDTO;
 import com.icet.clothify.model.dto.OrderDTO;
 import com.icet.clothify.model.dto.OrderItemDTO;
 import com.icet.clothify.model.dto.UserDTO;
-import com.icet.clothify.service.ServiceFactory;
 import com.icet.clothify.service.custom.ItemService;
 import com.icet.clothify.service.custom.OrderService;
 import com.icet.clothify.service.custom.UserService;
-import com.icet.clothify.util.ServiceType;
+import com.icet.clothify.util.EmailUtil;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -16,27 +16,31 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
 import org.modelmapper.ModelMapper;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.icet.clothify.util.Util.alert;
+import static com.icet.clothify.util.AlertUtil.alert;
 
 public class MakeOrderController {
 
     private final ObservableList<OrderItem> currentOrderItems = FXCollections.observableArrayList();
-    //<editor-fold desc="FXML-Fields">
     @FXML
     private ComboBox<ItemDTO> orderItemComboBox;
     @FXML
     private TextField orderItemQtyField;
+    @FXML
+    private TextField customerEmailField;
     @FXML
     private TableView<OrderItem> orderItemsTableView;
     @FXML
@@ -53,78 +57,50 @@ public class MakeOrderController {
     private ComboBox<String> orderPaymentMethodComboBox;
     @FXML
     private ComboBox<UserDTO> orderEmployeeComboBox;
-    //</editor-fold>
     @FXML
     private Label orderTotalLabel;
+
+    @Inject
     private ItemService itemService;
+    @Inject
     private UserService userService;
+    @Inject
     private OrderService orderService;
+
     private List<ItemDTO> allItemsList = new ArrayList<>();
 
     @FXML
     public void initialize() {
-        // Initialize services
-        try {
-            itemService = ServiceFactory.getInstance().getServiceType(ServiceType.ITEM);
-            userService = ServiceFactory.getInstance().getServiceType(ServiceType.USER);
-            orderService = ServiceFactory.getInstance().getServiceType(ServiceType.ORDER);
-        } catch (SQLException e) {
-            alert(Alert.AlertType.ERROR, "Initialization Failed", "Could not connect to services.");
-            e.printStackTrace();
-            return;
-        }
+        // === FIX APPLIED HERE ===
+        // This setup tells the TableView how to populate its columns from the OrderItem class.
+        colItemName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colItemQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        colItemPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colItemTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+
+        // Set the items for the table. The table will now automatically update
+        // whenever the currentOrderItems list changes.
+        orderItemsTableView.setItems(currentOrderItems);
 
         initializeData();
     }
 
-    /**
-     * Public method to load or reload data for this view.
-     */
     public void initializeData() {
-        // Setup table columns
-        colItemName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        colItemQty.setCellValueFactory(cellData -> cellData.getValue().qtyProperty().asObject());
-        colItemPrice.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
-        colItemTotal.setCellValueFactory(cellData -> cellData.getValue().totalProperty().asObject());
-        orderItemsTableView.setItems(currentOrderItems);
-
-        // Populate combo boxes
-        orderPaymentMethodComboBox.setItems(FXCollections.observableArrayList("Cash", "Card", "Online Transfer"));
-
         try {
-            // Load employees (users)
-            List<UserDTO> allUsers = userService.getAll();
-            orderEmployeeComboBox.setItems(FXCollections.observableArrayList(allUsers));
-            orderEmployeeComboBox.setConverter(new StringConverter<>() {
-                @Override
-                public String toString(UserDTO user) {
-                    return user == null ? "" : user.getName();
-                }
-
-                @Override
-                public UserDTO fromString(String string) {
-                    return null;
-                }
-            });
-
-            // Setup the searchable item combo box
             setupItemComboBox();
-
         } catch (SQLException e) {
-            alert(Alert.AlertType.ERROR, "Data Loading Error", "Could not load data for the order screen.");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
-        // Set a new order ID and clear the form
-        clearOrderForm();
     }
 
 
     @FXML
     void handleAddToOrder(ActionEvent event) {
+        if (orderIdField.getText().isEmpty()) {
+            orderIdField.setText(orderService.generateOrderId());
+        }
         ItemDTO selectedItem = orderItemComboBox.getValue();
 
-        // FIX: Add a null check before calling the service layer.
         if (selectedItem == null) {
             alert(Alert.AlertType.WARNING, "Selection Error", "Please select an item from the list before adding.");
             return;
@@ -140,7 +116,6 @@ public class MakeOrderController {
             return;
         }
 
-        // Check if the item is already in the cart to update quantity
         for (OrderItem item : currentOrderItems) {
             if (item.getItemId() == selectedItem.getId()) {
                 item.setQty(item.getQty() + quantity);
@@ -150,10 +125,9 @@ public class MakeOrderController {
             }
         }
 
-        // Add as a new item to the cart
         currentOrderItems.add(new OrderItem(selectedItem.getId(), selectedItem.getName(), quantity, selectedItem.getPrice()));
+        // No need to call updateOrderTotal here if it's handled by a listener, but keeping it is safe.
         orderService.updateOrderTotal(currentOrderItems, orderTotalLabel);
-
     }
 
     @FXML
@@ -169,7 +143,7 @@ public class MakeOrderController {
 
     @FXML
     void handlePlaceOrder(ActionEvent event) {
-        if (!orderService.handlePlaceOrderValidations(currentOrderItems, orderPaymentMethodComboBox, orderEmployeeComboBox))
+        if (!orderService.handlePlaceOrderValidations(currentOrderItems, orderPaymentMethodComboBox, orderEmployeeComboBox, customerEmailField))
             return;
 
         try {
@@ -178,13 +152,40 @@ public class MakeOrderController {
                     orderId,
                     orderItemsToDTO(),
                     Double.parseDouble(orderTotalLabel.getText().replace("LKR ", "")),
-                    orderPaymentMethodComboBox.getValue(),
+                    orderPaymentMethodComboBox.getValue(), LocalDateTime.now(),
                     orderEmployeeComboBox.getValue().getId()
             );
 
             boolean isAdded = orderService.placeOrder(orderDTO);
 
             if (isAdded) {
+
+                String recipient = customerEmailField.getText();
+                String subject = "Your Clothify Order #" + orderId + " has been confirmed!";
+
+                String body = EmailUtil.generateOrderConfirmationEmailBody(
+                        orderId,
+                        currentOrderItems,
+                        recipient
+                );
+
+                Task<Void> sendEmailTask = EmailUtil.createSendEmailTask(recipient, subject, body);
+
+                sendEmailTask.setOnSucceeded(event1 -> {
+
+                    alert(Alert.AlertType.WARNING, "Email  send", "Occurs when sending Email " + customerEmailField.getText());
+
+
+                });
+
+                sendEmailTask.setOnFailed(event1 -> {
+
+                    alert(Alert.AlertType.WARNING, "Email Not send", "Error Occurs when sending Email " + customerEmailField.getText());
+
+                });
+
+                new Thread(sendEmailTask).start();
+
                 alert(Alert.AlertType.INFORMATION, "Success", "Order has been placed successfully!");
                 setupItemComboBox(); // Refresh item list (stock changes)
                 clearOrderForm();
@@ -193,8 +194,6 @@ public class MakeOrderController {
             }
 
         } catch (SQLException e) {
-            alert(Alert.AlertType.ERROR, "Database Error", "Failed to save the order to the database.");
-            e.printStackTrace();
         } catch (Exception e) {
             alert(Alert.AlertType.ERROR, "Error", "An unexpected error occurred while placing the order.");
             e.printStackTrace();
@@ -219,11 +218,10 @@ public class MakeOrderController {
                 }
 
                 if (newVal == null || newVal.isEmpty()) {
-                    filteredItems.setPredicate(s -> true); // If empty, show all items
+                    filteredItems.setPredicate(s -> true);
                 } else {
                     String lowerCaseFilter = newVal.toLowerCase();
                     filteredItems.setPredicate(item -> {
-                        // Show item if its name or ID contains the filter text
                         if (item.getName().toLowerCase().contains(lowerCaseFilter)) {
                             return true;
                         } else return String.valueOf(item.getId()).contains(lowerCaseFilter);
@@ -232,21 +230,16 @@ public class MakeOrderController {
             });
         });
 
-        // 4. Set the ComboBox's items to be the FilteredList
         orderItemComboBox.setItems(filteredItems);
 
-        // 5. Use a clear and correct StringConverter
         orderItemComboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(ItemDTO item) {
-                // Return an empty string for null values. This prevents errors and "Items Not Found" text.
                 return item == null ? "" : item.getId() + " : " + item.getName() + " (LKR " + item.getPrice() + ")";
             }
 
             @Override
             public ItemDTO fromString(String string) {
-                // This is used to convert the text back to an item. It's mainly for when a selection is made.
-                // It will return null if the text doesn't exactly match an item, which is fine.
                 return allItemsList.stream()
                         .filter(item -> toString(item).equals(string))
                         .findFirst()
@@ -255,6 +248,25 @@ public class MakeOrderController {
         });
 
         orderItemComboBox.setEditable(true);
+
+        List<UserDTO> userDTOList = userService.getAll();
+
+        orderEmployeeComboBox.setItems(FXCollections.observableArrayList(userDTOList));
+
+        orderEmployeeComboBox.setConverter(new StringConverter<UserDTO>() {
+            @Override
+            public String toString(UserDTO userDTO) {
+                return userDTO.getId() + " : " + userDTO.getName();
+            }
+
+            @Override
+            public UserDTO fromString(String s) {
+                return userDTOList.stream()
+                        .filter(item -> toString(item).equals(s))
+                        .findFirst()
+                        .orElse(null);
+            }
+        });
     }
 
     private void clearOrderForm() {
@@ -266,6 +278,7 @@ public class MakeOrderController {
         orderPaymentMethodComboBox.getSelectionModel().clearSelection();
         orderEmployeeComboBox.getSelectionModel().clearSelection();
         orderService.updateOrderTotal(currentOrderItems, orderTotalLabel);
+        customerEmailField.setText("");
     }
 
     private List<OrderItemDTO> orderItemsToDTO() {
@@ -275,11 +288,13 @@ public class MakeOrderController {
                 .collect(Collectors.toList());
     }
 
+    public void handleSearchOrder(ActionEvent actionEvent) {
+    }
 
-    /**
-     * Inner class representing an item within an order, for display in the TableView.
-     * Uses JavaFX properties for automatic table updates.
-     */
+    public void handleProcessReturn(ActionEvent actionEvent) {
+    }
+
+
     public static class OrderItem {
         private final SimpleIntegerProperty itemId;
         private final SimpleStringProperty name;

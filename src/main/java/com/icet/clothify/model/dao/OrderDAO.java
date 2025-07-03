@@ -3,6 +3,7 @@ package com.icet.clothify.model.dao;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -23,5 +24,8 @@ public class OrderDAO {
 
     private Double total;
     private String paymentMethod;
+
+    private LocalDateTime orderDate;
     private String employeeId;
+
 }

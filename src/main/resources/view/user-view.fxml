@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The root AnchorPane allows elements to be anchored to the window edges, making it responsive. -->
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="540.0" prefWidth="1100.0"
+            style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21"
+            fx:controller="com.icet.clothify.controller.UserManagementController">
+    <children>
+        <!-- HBox splits the view into two resizable panels, each taking half the space. -->
+        <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <!-- The VBox containing the forms will grow horizontally. -->
+                <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                    <children>
+                        <TabPane style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE"
+                                 VBox.vgrow="ALWAYS">
+                            <tabs>
+                                <!-- Tab 1: Add User -->
+                                <Tab text="Add User">
+                                    <content>
+                                        <AnchorPane style="-fx-background-color: #ffffff;">
+                                            <children>
+                                                <VBox alignment="TOP_CENTER" spacing="20.0"
+                                                      style="-fx-background-color: white; -fx-background-radius: 10;"
+                                                      AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+                                                      AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                                    <effect>
+                                                        <DropShadow blurType="GAUSSIAN" height="20" offsetY="3.0"
+                                                                    radius="9.5" width="20">
+                                                            <color>
+                                                                <Color opacity="0.1"/>
+                                                            </color>
+                                                        </DropShadow>
+                                                    </effect>
+                                                    <children>
+                                                        <Label text="Add New User" textFill="#333333">
+                                                            <font>
+                                                                <Font name="System Bold" size="24.0"/>
+                                                            </font>
+                                                            <VBox.margin>
+                                                                <Insets top="10.0"/>
+                                                            </VBox.margin>
+                                                        </Label>
+                                                        <HBox alignment="CENTER" spacing="30.0">
+                                                            <children>
+                                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Label text="User ID" textFill="#4a4a4a"/>
+                                                                        <TextField fx:id="userIdField" editable="false"
+                                                                                   prefHeight="40.0"
+                                                                                   promptText="Auto-generated"
+                                                                                   styleClass="form-field-disabled"/>
+                                                                    </children>
+                                                                </VBox>
+                                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Label text="Full Name" textFill="#4a4a4a"/>
+                                                                        <TextField fx:id="userNameField"
+                                                                                   prefHeight="40.0"
+                                                                                   promptText="e.g., John Doe"
+                                                                                   styleClass="form-field"/>
+                                                                    </children>
+                                                                </VBox>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox alignment="CENTER" spacing="30.0">
+                                                            <children>
+                                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Label text="Email Address" textFill="#4a4a4a"/>
+                                                                        <TextField fx:id="emailField" prefHeight="40.0"
+                                                                                   promptText="e.g., john.d@example.com"
+                                                                                   styleClass="form-field"/>
+                                                                    </children>
+                                                                </VBox>
+                                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Label text="Company" textFill="#4a4a4a"/>
+                                                                        <TextField fx:id="companyField"
+                                                                                   prefHeight="40.0"
+                                                                                   promptText="e.g., Clothify Inc."
+                                                                                   styleClass="form-field"/>
+                                                                    </children>
+                                                                </VBox>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox alignment="CENTER" spacing="30.0">
+                                                            <children>
+                                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Label text="Password" textFill="#4a4a4a"/>
+                                                                        <PasswordField fx:id="passwordField"
+                                                                                       prefHeight="40.0"
+                                                                                       promptText="Enter a strong password"
+                                                                                       styleClass="form-field"/>
+                                                                    </children>
+                                                                </VBox>
+                                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Label text="Confirm Password"
+                                                                               textFill="#4a4a4a"/>
+                                                                        <PasswordField fx:id="confirmPasswordField"
+                                                                                       prefHeight="40.0"
+                                                                                       promptText="Re-enter password"
+                                                                                       styleClass="form-field"/>
+                                                                    </children>
+                                                                </VBox>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox>
+                                                            <children>
+                                                                <JFXCheckBox fx:id="isEmployeeCheckBox"
+                                                                             text="This user is an Employee"/>
+                                                            </children>
+                                                        </HBox>
+                                                        <Button onAction="#handleCreateUser" prefHeight="45.0"
+                                                                maxWidth="Infinity" styleClass="button-primary"
+                                                                text="Create User Account" VBox.vgrow="NEVER">
+                                                            <font>
+                                                                <Font name="System Bold" size="16.0"/>
+                                                            </font>
+                                                        </Button>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
+                                                    </padding>
+                                                </VBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </Tab>
+                                <!-- Tab 2: Update User -->
+                                <Tab text="Update User">
+                                    <content>
+                                        <AnchorPane style="-fx-background-color: #ffffff;">
+                                            <children>
+                                                <VBox alignment="TOP_CENTER" spacing="20.0"
+                                                      style="-fx-background-color: white; -fx-background-radius: 10;"
+                                                      AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+                                                      AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                                    <effect>
+                                                        <DropShadow blurType="GAUSSIAN" height="20" offsetY="3.0"
+                                                                    radius="9.5" width="20">
+                                                            <color>
+                                                                <Color opacity="0.1"/>
+                                                            </color>
+                                                        </DropShadow>
+                                                    </effect>
+                                                    <children>
+                                                        <Label text="Update User Information" textFill="#333333">
+                                                            <font>
+                                                                <Font name="System Bold" size="24.0"/>
+                                                            </font>
+                                                            <VBox.margin>
+                                                                <Insets top="10.0"/>
+                                                            </VBox.margin>
+                                                        </Label>
+                                                        <VBox spacing="5.0">
+                                                            <children>
+                                                                <Label text="Select User to Update" textFill="#4a4a4a"/>
+                                                                <ComboBox fx:id="updateUserComboBox" prefHeight="40.0"
+                                                                          maxWidth="Infinity"
+                                                                          promptText="Click to select a user"
+                                                                          styleClass="form-field"/>
+                                                            </children>
+                                                        </VBox>
+                                                        <Separator prefWidth="200.0"/>
+                                                        <HBox alignment="CENTER" spacing="30.0">
+                                                            <children>
+                                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Label text="User ID" textFill="#4a4a4a"/>
+                                                                        <TextField fx:id="updateUserIdField"
+                                                                                   editable="false" prefHeight="40.0"
+                                                                                   styleClass="form-field-disabled"/>
+                                                                    </children>
+                                                                </VBox>
+                                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Label text="Full Name" textFill="#4a4a4a"/>
+                                                                        <TextField fx:id="updateUserNameField"
+                                                                                   prefHeight="40.0"
+                                                                                   styleClass="form-field"/>
+                                                                    </children>
+                                                                </VBox>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox alignment="CENTER" spacing="30.0">
+                                                            <children>
+                                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Label text="Email Address" textFill="#4a4a4a"/>
+                                                                        <TextField fx:id="updateEmailField"
+                                                                                   prefHeight="40.0"
+                                                                                   styleClass="form-field"/>
+                                                                    </children>
+                                                                </VBox>
+                                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Label text="Company" textFill="#4a4a4a"/>
+                                                                        <TextField fx:id="updateCompanyField"
+                                                                                   prefHeight="40.0"
+                                                                                   styleClass="form-field"/>
+                                                                    </children>
+                                                                </VBox>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox>
+                                                            <children>
+                                                                <JFXCheckBox fx:id="updateIsEmployeeCheckBox"
+                                                                             text="This user is an Employee"/>
+                                                            </children>
+                                                        </HBox>
+                                                        <Button onAction="#handleUpdateUser" prefHeight="45.0"
+                                                                maxWidth="Infinity" styleClass="button-primary"
+                                                                text="Save Changes">
+                                                            <font>
+                                                                <Font name="System Bold" size="16.0"/>
+                                                            </font>
+                                                        </Button>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
+                                                    </padding>
+                                                </VBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </Tab>
+                                <!-- Tab 3: Delete User -->
+                                <Tab text="Delete User">
+                                    <content>
+                                        <AnchorPane style="-fx-background-color: #ffffff;">
+                                            <children>
+                                                <VBox alignment="TOP_CENTER" spacing="20.0"
+                                                      style="-fx-background-color: white; -fx-background-radius: 10;"
+                                                      AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+                                                      AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                                    <effect>
+                                                        <DropShadow blurType="GAUSSIAN" height="20" offsetY="3.0"
+                                                                    radius="9.5" width="20">
+                                                            <color>
+                                                                <Color opacity="0.1"/>
+                                                            </color>
+                                                        </DropShadow>
+                                                    </effect>
+                                                    <children>
+                                                        <Label text="Delete User" textFill="#333333">
+                                                            <font>
+                                                                <Font name="System Bold" size="24.0"/>
+                                                            </font>
+                                                            <VBox.margin>
+                                                                <Insets top="10.0"/>
+                                                            </VBox.margin>
+                                                        </Label>
+                                                        <VBox spacing="5.0">
+                                                            <children>
+                                                                <Label text="Select User to Delete" textFill="#4a4a4a"/>
+                                                                <ComboBox fx:id="deleteUserComboBox" prefHeight="40.0"
+                                                                          maxWidth="Infinity"
+                                                                          promptText="Click to select a user"
+                                                                          styleClass="form-field"/>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox alignment="CENTER"
+                                                              style="-fx-background-color: #ffebee; -fx-background-radius: 8;">
+                                                            <children>
+                                                                <Label text="Warning: This action is permanent and cannot be undone. All data associated with this user will be lost."
+                                                                       textFill="#c62828" wrapText="true">
+                                                                    <font>
+                                                                        <Font name="System Italic" size="13.0"/>
+                                                                    </font>
+                                                                </Label>
+                                                            </children>
+                                                            <padding>
+                                                                <Insets bottom="15.0" left="15.0" right="15.0"
+                                                                        top="15.0"/>
+                                                            </padding>
+                                                        </VBox>
+                                                        <Pane VBox.vgrow="ALWAYS"/>
+                                                        <Button onAction="#handleDeleteUser" prefHeight="45.0"
+                                                                maxWidth="Infinity" styleClass="button-danger"
+                                                                text="Delete User Permanently">
+                                                            <font>
+                                                                <Font name="System Bold" size="16.0"/>
+                                                            </font>
+                                                        </Button>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
+                                                    </padding>
+                                                </VBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </Tab>
+                            </tabs>
+                        </TabPane>
+                    </children>
+                </VBox>
+                <!-- The image container will also grow to take up half the space. -->
+                <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label text="User Management" textFill="#333333">
+                            <font>
+                                <Font name="System Bold" size="20.0"/>
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="350.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../img/dashboard/img-4.png"/>
+                            </image>
+                            <VBox.margin>
+                                <Insets top="10.0"/>
+                            </VBox.margin>
+                        </ImageView>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

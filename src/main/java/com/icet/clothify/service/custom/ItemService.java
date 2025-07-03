@@ -20,4 +20,10 @@ public interface ItemService extends SuperService {
     ItemDTO searchById(String id) throws SQLException;
 
     boolean validateInputsForItem(TextField itemNameField, ComboBox<String> itemCategoryComboBox, ComboBox<String> itemSizeComboBox, ComboBox<SupplierDTO> supplierComboBox, TextField itemPriceField, TextField itemQuantityField);
+
+    Integer getItemCount() throws SQLException;
+
+    public void generateAndShowItemsInventoryReport() throws SQLException;
+
+    public boolean update(ItemDTO itemDTO) throws SQLException;
 }

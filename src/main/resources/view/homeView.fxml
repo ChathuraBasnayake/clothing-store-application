@@ -8,15 +8,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="20.0" style="-fx-background-color: transparent;"
-      xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.icet.clothify.controller.HomeController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.icet.clothify.controller.HomeController"
+      xmlns="http://javafx.com/javafx/23.0.1" spacing="20.0" style="-fx-background-color: transparent;">
     <children>
-        <ScrollPane fitToWidth="true" hbarPolicy="NEVER"
-                    style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS"
+                    style="-fx-background-color: transparent; -fx-background: transparent;">
             <content>
                 <VBox spacing="20.0">
                     <padding>
-                        <Insets top="5.0" right="5.0" bottom="5.0" left="5.0"/>
+                        <Insets top="5" right="5" bottom="5" left="5"/>
                     </padding>
                     <children>
                         <Label text="Clothify Overview" textFill="#333333">
@@ -24,8 +24,9 @@
                                 <Font name="System Bold" size="24.0"/>
                             </font>
                         </Label>
+
+                        <!-- Stats Cards -->
                         <GridPane hgap="20.0" vgap="20.0">
-                            <!-- Stat Cards for Sales, Users, Items -->
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
@@ -39,10 +40,10 @@
                                     <HBox alignment="CENTER_LEFT" spacing="15.0">
                                         <Pane style="-fx-background-color: #e0f7fa; -fx-background-radius: 50;">
                                             <padding>
-                                                <Insets top="12.0" right="12.0" bottom="12.0" left="12.0"/>
+                                                <Insets top="12" right="12" bottom="12" left="12"/>
                                             </padding>
                                             <children>
-                                                <FontAwesomeIconView fill="#0097a7" glyphName="DOLLAR" size="1.8em"/>
+                                                <FontAwesomeIconView glyphName="DOLLAR" size="1.8em" fill="#0097a7"/>
                                             </children>
                                         </Pane>
                                         <VBox>
@@ -51,7 +52,7 @@
                                                     <Font name="System Bold" size="14.0"/>
                                                 </font>
                                             </Label>
-                                            <Label fx:id="totalSalesLabel" text="\$0.00" textFill="#262323">
+                                            <Label fx:id="totalSalesLabel" text="LKR 0.00" textFill="#262323">
                                                 <font>
                                                     <Font name="System Bold" size="28.0"/>
                                                 </font>
@@ -59,14 +60,15 @@
                                         </VBox>
                                     </HBox>
                                 </VBox>
+
                                 <VBox styleClass="stat-card" GridPane.columnIndex="1">
                                     <HBox alignment="CENTER_LEFT" spacing="15.0">
                                         <Pane style="-fx-background-color: #fff3e0; -fx-background-radius: 50;">
                                             <padding>
-                                                <Insets top="12.0" right="12.0" bottom="12.0" left="12.0"/>
+                                                <Insets top="12" right="12" bottom="12" left="12"/>
                                             </padding>
                                             <children>
-                                                <FontAwesomeIconView fill="#ff9800" glyphName="USERS" size="1.8em"/>
+                                                <FontAwesomeIconView glyphName="USERS" size="1.8em" fill="#ff9800"/>
                                             </children>
                                         </Pane>
                                         <VBox>
@@ -83,14 +85,15 @@
                                         </VBox>
                                     </HBox>
                                 </VBox>
+
                                 <VBox styleClass="stat-card" GridPane.columnIndex="2">
                                     <HBox alignment="CENTER_LEFT" spacing="15.0">
                                         <Pane style="-fx-background-color: #e8eaf6; -fx-background-radius: 50;">
                                             <padding>
-                                                <Insets top="12.0" right="12.0" bottom="12.0" left="12.0"/>
+                                                <Insets top="12" right="12" bottom="12" left="12"/>
                                             </padding>
                                             <children>
-                                                <FontAwesomeIconView fill="#3f51b5" glyphName="CUBE" size="1.8em"/>
+                                                <FontAwesomeIconView glyphName="CUBE" size="1.8em" fill="#3f51b5"/>
                                             </children>
                                         </Pane>
                                         <VBox>
@@ -109,31 +112,36 @@
                                 </VBox>
                             </children>
                         </GridPane>
+
+                        <!-- Charts and Activity -->
                         <HBox spacing="20.0" VBox.vgrow="ALWAYS">
-                            <VBox styleClass="chart-container" HBox.hgrow="ALWAYS">
-                                <Label text="Monthly Sales">
-                                    <font>
-                                        <Font name="System Bold" size="16.0"/>
-                                    </font>
-                                </Label>
-                                <BarChart fx:id="salesChart" animated="false" barGap="5.0" categoryGap="20.0"
-                                          legendVisible="false">
-                                    <xAxis>
-                                        <CategoryAxis side="BOTTOM"/>
-                                    </xAxis>
-                                    <yAxis>
-                                        <NumberAxis side="LEFT"/>
-                                    </yAxis>
-                                </BarChart>
-                            </VBox>
-                            <VBox minWidth="-Infinity" prefWidth="320.0" styleClass="activity-container">
-                                <Label text="Recent Activity">
-                                    <font>
-                                        <Font name="System Bold" size="16.0"/>
-                                    </font>
-                                </Label>
-                                <ListView fx:id="activityListView"/>
-                            </VBox>
+                            <children>
+                                <VBox styleClass="chart-container" HBox.hgrow="ALWAYS">
+                                    <Label text="Monthly Sales (Last 6 Months)">
+                                        <font>
+                                            <Font name="System Bold" size="16.0"/>
+                                        </font>
+                                    </Label>
+                                    <BarChart fx:id="salesChart" animated="true" barGap="5.0" categoryGap="20.0"
+                                              legendVisible="false">
+                                        <xAxis>
+                                            <CategoryAxis fx:id="xAxis" side="BOTTOM"/>
+                                        </xAxis>
+                                        <yAxis>
+                                            <NumberAxis side="LEFT"/>
+                                        </yAxis>
+                                    </BarChart>
+                                </VBox>
+
+                                <VBox styleClass="activity-container" prefWidth="320.0" minWidth="-Infinity">
+                                    <Label text="Recent Activity">
+                                        <font>
+                                            <Font name="System Bold" size="16.0"/>
+                                        </font>
+                                    </Label>
+                                    <ListView fx:id="activityListView"/>
+                                </VBox>
+                            </children>
                         </HBox>
                     </children>
                 </VBox>

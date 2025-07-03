@@ -1,9 +1,8 @@
 package com.icet.clothify.controller;
 
+import com.google.inject.Inject;
 import com.icet.clothify.model.dto.UserDTO;
-import com.icet.clothify.service.ServiceFactory;
 import com.icet.clothify.service.custom.UserService;
-import com.icet.clothify.util.ServiceType;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -21,7 +20,9 @@ import java.sql.SQLException;
 
 public class AuthenticationController {
 
+    @Inject
     UserService userService;
+
     Boolean isLoginSucceedWithAdminAcc = false;
     Boolean navigateToSignUp = false;
     @FXML
@@ -49,15 +50,6 @@ public class AuthenticationController {
     @FXML
     private JFXCheckBox signUpIsEmployee;
 
-    {
-        try {
-            userService = ServiceFactory.getInstance().getServiceType(ServiceType.USER);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    // --- Pane Navigation Methods ---
-
     @FXML
     void showLoginPane(ActionEvent event) {
         loginPane.setVisible(true);
@@ -80,7 +72,6 @@ public class AuthenticationController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @FXML
@@ -89,8 +80,6 @@ public class AuthenticationController {
         signUpPane.setVisible(false);
         forgotPasswordPane.setVisible(true);
     }
-
-    // --- Action Methods ---
 
     @FXML
     void loginOnAction(ActionEvent event) {
@@ -144,7 +133,6 @@ public class AuthenticationController {
 
     @FXML
     void sendLinkOnAction(ActionEvent event) {
-        // Implement logic to handle password reset request
         System.out.println("Send reset link button clicked.");
     }
 

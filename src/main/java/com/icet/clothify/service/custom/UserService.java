@@ -14,6 +14,8 @@ public interface UserService extends SuperService {
 
     boolean delete(String id) throws SQLException;
 
+    boolean update(UserDTO userDTO) throws SQLException;
+
     UserDTO searchByEmail(String name) throws SQLException;
 
     UserDTO searchById(String id) throws SQLException;
@@ -21,4 +23,6 @@ public interface UserService extends SuperService {
     boolean userVerifier(String email, String password) throws SQLException;
 
     boolean isAdmin(String email) throws SQLException;
+
+    public void generateAndShowUsersReport() throws SQLException;
 }

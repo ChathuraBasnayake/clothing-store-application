@@ -6,7 +6,6 @@ public class SettingsController {
 
     @FXML
     public void initialize() {
-        // This is a placeholder for any settings initialization logic.
         System.out.println("Settings View Initialized.");
     }
 }

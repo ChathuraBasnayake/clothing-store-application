@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public interface OrderService extends SuperService {
 
@@ -29,5 +30,13 @@ public interface OrderService extends SuperService {
 
     void updateOrderTotal(ObservableList<MakeOrderController.OrderItem> currentOrderItems, Label orderTotalLabel);
 
-    boolean handlePlaceOrderValidations(ObservableList<MakeOrderController.OrderItem> currentOrderItems, ComboBox<String> orderPaymentMethodComboBox, ComboBox<UserDTO> orderEmployeeComboBox);
+    boolean handlePlaceOrderValidations(ObservableList<MakeOrderController.OrderItem> currentOrderItems, ComboBox<String> orderPaymentMethodComboBox, ComboBox<UserDTO> orderEmployeeComboBox, TextField customerEmailField);
+
+    double getTotalSalesAmount() throws SQLException;
+
+    public Map<String, Double> getSalesByCategory() throws SQLException;
+
+    public Map<String, Double> getMonthlySales(int i) throws SQLException;
+
+    List<OrderDTO> getRecentOrders(int i) throws SQLException;
 }

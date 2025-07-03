@@ -37,16 +37,26 @@ public class SupplierRepositoryImpl implements SupplierRepository {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
             transaction = session.beginTransaction();
-            session.remove(session.byId(id));
+
+            //noinspection removal
+            SupplierDAO supplier = session.get(SupplierDAO.class, id); // load entity
+
+            if (supplier != null) {
+                session.remove(supplier); // remove the entity
+            } else {
+                System.out.println("No supplier found with ID: " + id);
+                return false;
+            }
+
             transaction.commit();
             return true;
-        } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
             return false;
         }
+
     }
 
     @Override

@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="650.0" prefWidth="1050.0"
+            style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/21"
+            fx:controller="com.icet.clothify.controller.InventoryManagementController">
+    <children>
+        <TabPane tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab text="Add Item">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <GridPane AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+                                          AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" hgap="20">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="ALWAYS" percentWidth="60.0"/>
+                                        <ColumnConstraints hgrow="ALWAYS" percentWidth="40.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="TOP_CENTER" spacing="15.0"
+                                              style="-fx-background-color: white; -fx-background-radius: 10;"
+                                              GridPane.columnIndex="0">
+                                            <effect>
+                                                <DropShadow blurType="GAUSSIAN" height="20" offsetY="3.0" radius="9.5"
+                                                            width="20">
+                                                    <color>
+                                                        <Color opacity="0.1"/>
+                                                    </color>
+                                                </DropShadow>
+                                            </effect>
+                                            <padding>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
+                                            </padding>
+                                            <children>
+                                                <Label text="Add New Item" textFill="#333333">
+                                                    <font>
+                                                        <Font name="System Bold" size="24.0"/>
+                                                    </font>
+                                                    <VBox.margin>
+                                                        <Insets top="10.0"/>
+                                                    </VBox.margin>
+                                                </Label>
+                                                <HBox spacing="20.0">
+                                                    <children>
+                                                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Label text="Item Name" textFill="#4a4a4a"/>
+                                                                <TextField fx:id="itemNameField" prefHeight="40.0"
+                                                                           promptText="e.g., Men's Classic T-Shirt"
+                                                                           styleClass="form-field"/>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Label text="Price" textFill="#4a4a4a"/>
+                                                                <TextField fx:id="itemPriceField" prefHeight="40.0"
+                                                                           promptText="e.g., 29.99"
+                                                                           styleClass="form-field"/>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                                <HBox spacing="20.0">
+                                                    <children>
+                                                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Label text="Category" textFill="#4a4a4a"/>
+                                                                <ComboBox fx:id="itemCategoryComboBox" prefHeight="40.0"
+                                                                          promptText="Select a category"
+                                                                          styleClass="form-field" HBox.hgrow="ALWAYS"
+                                                                          maxWidth="Infinity">
+                                                                    <items>
+                                                                        <FXCollections fx:factory="observableArrayList">
+                                                                            <String fx:value="Male"/>
+                                                                            <String fx:value="Female"/>
+                                                                            <String fx:value="Kids"/>
+                                                                            <String fx:value="Unisex"/>
+                                                                        </FXCollections>
+                                                                    </items>
+                                                                </ComboBox>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Label text="Quantity" textFill="#4a4a4a"/>
+                                                                <TextField fx:id="itemQuantityField" prefHeight="40.0"
+                                                                           promptText="e.g., 100"
+                                                                           styleClass="form-field"/>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                                <HBox spacing="20.0">
+                                                    <children>
+                                                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Label text="Size" textFill="#4a4a4a"/>
+                                                                <ComboBox fx:id="itemSizeComboBox" prefHeight="40.0"
+                                                                          promptText="Select a size"
+                                                                          styleClass="form-field" HBox.hgrow="ALWAYS"
+                                                                          maxWidth="Infinity">
+                                                                    <items>
+                                                                        <FXCollections fx:factory="observableArrayList">
+                                                                            <String fx:value="Small"/>
+                                                                            <String fx:value="Medium"/>
+                                                                            <String fx:value="Large"/>
+                                                                            <String fx:value="XL"/>
+                                                                            <String fx:value="XXL"/>
+                                                                        </FXCollections>
+                                                                    </items>
+                                                                </ComboBox>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Label text="Supplier" textFill="#4a4a4a"/>
+                                                                <ComboBox fx:id="supplierComboBox" prefHeight="40.0"
+                                                                          promptText="Select a supplier"
+                                                                          styleClass="form-field" HBox.hgrow="ALWAYS"
+                                                                          maxWidth="Infinity"/>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                                <VBox spacing="5.0">
+                                                    <children>
+                                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                            <Label text="Item Description" textFill="#4a4a4a"/>
+                                                            <Button fx:id="generateDescriptionBtn"
+                                                                    onAction="#generateItemDescription"
+                                                                    style="-fx-background-color: #9c27b0; -fx-background-radius: 8px;"
+                                                                    text="Generate with AI ✨" textFill="WHITE">
+                                                                <font>
+                                                                    <Font name="System Bold" size="12.0"/>
+                                                                </font>
+                                                            </Button>
+                                                        </HBox>
+                                                        <TextArea fx:id="itemDescriptionArea" prefHeight="80.0"
+                                                                  promptText="A compelling description of the item..."
+                                                                  styleClass="form-field" wrapText="true"/>
+                                                        <Label fx:id="descriptionErrorLabel" managed="false"
+                                                               textFill="#dc3545" visible="false"/>
+                                                    </children>
+                                                </VBox>
+                                                <Pane VBox.vgrow="ALWAYS"/>
+                                                <Button onAction="#handleSave" prefHeight="45.0" maxWidth="Infinity"
+                                                        styleClass="button-primary" text="Add Item to Inventory">
+                                                    <font>
+                                                        <Font name="System Bold" size="16.0"/>
+                                                    </font>
+                                                </Button>
+                                            </children>
+                                        </VBox>
+
+                                        <Pane style="-fx-background-radius: 10;" GridPane.columnIndex="1">
+                                            <children>
+                                                <ImageView fitHeight="${imagePane.height}" fitWidth="${imagePane.width}"
+                                                           pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../img/signup-form/img-2.png"/>
+                                                    </image>
+                                                </ImageView>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <Tab text="Update Item">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <GridPane AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+                                          AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" hgap="20">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="60.0"/>
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="40.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="TOP_CENTER" spacing="15.0"
+                                              style="-fx-background-color: white; -fx-background-radius: 10;"
+                                              GridPane.columnIndex="0">
+                                            <effect>
+                                                <DropShadow blurType="GAUSSIAN" height="20" offsetY="3.0" radius="9.5"
+                                                            width="20">
+                                                    <color>
+                                                        <Color opacity="0.1"/>
+                                                    </color>
+                                                </DropShadow>
+                                            </effect>
+                                            <padding>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
+                                            </padding>
+                                            <children>
+                                                <Label text="Update Item Information" textFill="#333333">
+                                                    <font>
+                                                        <Font name="System Bold" size="24.0"/>
+                                                    </font>
+                                                    <VBox.margin>
+                                                        <Insets top="10.0"/>
+                                                    </VBox.margin>
+                                                </Label>
+                                                <VBox spacing="5.0">
+                                                    <children>
+                                                        <Label text="Select Item to Update" textFill="#4a4a4a"/>
+                                                        <ComboBox fx:id="updateItemComboBox" prefHeight="40.0"
+                                                                  maxWidth="Infinity"
+                                                                  promptText="Click to select an item"
+                                                                  styleClass="form-field"/>
+                                                    </children>
+                                                </VBox>
+                                                <Separator prefWidth="200.0"/>
+                                                <HBox spacing="20.0">
+                                                    <children>
+                                                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Label text="Item ID" textFill="#4a4a4a"/>
+                                                                <TextField fx:id="updateItemIdField" editable="false"
+                                                                           prefHeight="40.0"
+                                                                           styleClass="form-field-disabled"/>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Label text="Item Name" textFill="#4a4a4a"/>
+                                                                <TextField fx:id="updateItemNameField" prefHeight="40.0"
+                                                                           styleClass="form-field"/>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                                <HBox spacing="20.0">
+                                                    <children>
+                                                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Label text="Price" textFill="#4a4a4a"/>
+                                                                <TextField fx:id="updateItemPriceField"
+                                                                           prefHeight="40.0" styleClass="form-field"/>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Label text="Quantity" textFill="#4a4a4a"/>
+                                                                <TextField fx:id="updateItemQuantityField"
+                                                                           prefHeight="40.0" styleClass="form-field"/>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+
+                                                <!-- === FIX APPLIED HERE === -->
+                                                <HBox spacing="20.0">
+                                                    <children>
+                                                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Label text="Category" textFill="#4a4a4a"/>
+                                                                <ComboBox fx:id="updateItemCategoryComboBox"
+                                                                          prefHeight="40.0" maxWidth="Infinity"
+                                                                          promptText="Select a new category"
+                                                                          styleClass="form-field">
+                                                                    <items>
+                                                                        <FXCollections fx:factory="observableArrayList">
+                                                                            <String fx:value="Male"/>
+                                                                            <String fx:value="Female"/>
+                                                                            <String fx:value="Kids"/>
+                                                                            <String fx:value="Unisex"/>
+                                                                        </FXCollections>
+                                                                    </items>
+                                                                </ComboBox>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <Label text="Size" textFill="#4a4a4a"/>
+                                                                <ComboBox fx:id="updateItemSizeComboBox"
+                                                                          prefHeight="40.0" maxWidth="Infinity"
+                                                                          promptText="Select a new size"
+                                                                          styleClass="form-field">
+                                                                    <items>
+                                                                        <FXCollections fx:factory="observableArrayList">
+                                                                            <String fx:value="Small"/>
+                                                                            <String fx:value="Medium"/>
+                                                                            <String fx:value="Large"/>
+                                                                            <String fx:value="XL"/>
+                                                                            <String fx:value="XXL"/>
+                                                                        </FXCollections>
+                                                                    </items>
+                                                                </ComboBox>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+
+                                                <VBox spacing="5.0">
+                                                    <children>
+                                                        <Label text="Supplier" textFill="#4a4a4a"/>
+                                                        <ComboBox fx:id="updateSupplierComboBox" prefHeight="40.0"
+                                                                  maxWidth="Infinity" promptText="Select a new supplier"
+                                                                  styleClass="form-field"/>
+                                                    </children>
+                                                </VBox>
+
+                                                <Pane VBox.vgrow="ALWAYS"/>
+                                                <Button onAction="#handleUpdate" prefHeight="45.0" maxWidth="Infinity"
+                                                        styleClass="button-primary" text="Update Item">
+                                                    <font>
+                                                        <Font name="System Bold" size="16.0"/>
+                                                    </font>
+                                                </Button>
+                                            </children>
+                                        </VBox>
+                                        <Pane style="-fx-background-radius: 10;" GridPane.columnIndex="1">
+                                            <children>
+                                                <ImageView fitHeight="${imagePane.height}" fitWidth="${imagePane.width}"
+                                                           pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../img/signup-form/img-2.png"/>
+                                                    </image>
+                                                </ImageView>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <Tab text="Delete Item">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <GridPane AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+                                          AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" hgap="20">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="60.0"/>
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="40.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="TOP_CENTER" spacing="20.0"
+                                              style="-fx-background-color: white; -fx-background-radius: 10;"
+                                              GridPane.columnIndex="0">
+                                            <effect>
+                                                <DropShadow blurType="GAUSSIAN" height="20" offsetY="3.0" radius="9.5"
+                                                            width="20">
+                                                    <color>
+                                                        <Color opacity="0.1"/>
+                                                    </color>
+                                                </DropShadow>
+                                            </effect>
+                                            <padding>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
+                                            </padding>
+                                            <children>
+                                                <Label text="Delete Item" textFill="#333333">
+                                                    <font>
+                                                        <Font name="System Bold" size="24.0"/>
+                                                    </font>
+                                                    <VBox.margin>
+                                                        <Insets top="10.0"/>
+                                                    </VBox.margin>
+                                                </Label>
+                                                <VBox spacing="5.0">
+                                                    <children>
+                                                        <Label text="Select Item to Delete" textFill="#4a4a4a"/>
+                                                        <ComboBox fx:id="deleteItemComboBox" prefHeight="40.0"
+                                                                  maxWidth="Infinity"
+                                                                  promptText="Click to select an item"
+                                                                  styleClass="form-field"/>
+                                                    </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER"
+                                                      style="-fx-background-color: #ffebee; -fx-background-radius: 8;">
+                                                    <padding>
+                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                                                    </padding>
+                                                    <children>
+                                                        <Label text="Warning: This action is permanent and cannot be undone. Deleting an item will remove it from all records."
+                                                               textFill="#c62828" wrapText="true"/>
+                                                    </children>
+                                                </VBox>
+                                                <Pane VBox.vgrow="ALWAYS"/>
+                                                <Button onAction="#handleDelete" prefHeight="45.0" maxWidth="Infinity"
+                                                        styleClass="button-danger" text="Delete Item Permanently">
+                                                    <font>
+                                                        <Font name="System Bold" size="16.0"/>
+                                                    </font>
+                                                </Button>
+                                            </children>
+                                        </VBox>
+                                        <Pane fx:id="imagePane" style="-fx-background-radius: 10;"
+                                              GridPane.columnIndex="1">
+                                            <children>
+                                                <ImageView fitHeight="${imagePane.height}" fitWidth="${imagePane.width}"
+                                                           pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../img/signup-form/img-2.png"/>
+                                                    </image>
+                                                </ImageView>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

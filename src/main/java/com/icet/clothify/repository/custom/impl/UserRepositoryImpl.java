@@ -55,6 +55,13 @@ public class UserRepositoryImpl implements UserRepository {
     public boolean update(UserDAO dao) throws SQLException {
         Transaction transaction = null;
 
+
+        UserDAO userDAO = searchById(dao.getId());
+
+        System.out.println(userDAO);
+
+        dao.setPassword(userDAO.getPassword());
+
         try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
             transaction = session.beginTransaction();
             session.merge(dao);
@@ -89,7 +96,8 @@ public class UserRepositoryImpl implements UserRepository {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
             transaction = session.beginTransaction();
-            UserDAO userDAO = (UserDAO) session.byId(id);
+            //noinspection removal
+            UserDAO userDAO = session.get(UserDAO.class, id); // correct
             transaction.commit();
             return userDAO;
         } catch (HibernateException e) {

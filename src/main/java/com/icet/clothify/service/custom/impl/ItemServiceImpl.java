@@ -1,26 +1,31 @@
 package com.icet.clothify.service.custom.impl;
 
+import com.google.inject.Inject;
 import com.icet.clothify.model.dao.ItemDAO;
 import com.icet.clothify.model.dto.ItemDTO;
 import com.icet.clothify.model.dto.SupplierDTO;
-import com.icet.clothify.repository.DAOFactory;
 import com.icet.clothify.repository.custom.ItemRepository;
 import com.icet.clothify.service.custom.ItemService;
-import com.icet.clothify.util.RepositoryType;
+import com.icet.clothify.util.AlertUtil;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 import org.modelmapper.ModelMapper;
 
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.icet.clothify.util.Util.alert;
+import static com.icet.clothify.util.AlertUtil.alert;
 
 public class ItemServiceImpl implements ItemService {
 
-    ItemRepository itemRepository = DAOFactory.getInstance().getServices(RepositoryType.ITEM);
+    @Inject
+    ItemRepository itemRepository;
 
     ModelMapper modelMapper = new ModelMapper();
 
@@ -80,5 +85,46 @@ public class ItemServiceImpl implements ItemService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public Integer getItemCount() throws SQLException {
+        return getAll().size();
+    }
+
+    @Override
+    public void generateAndShowItemsInventoryReport() throws SQLException {
+        try {
+
+            List<ItemDTO> all = getAll();
+
+            if (all.isEmpty()) {
+
+                AlertUtil.alert(Alert.AlertType.INFORMATION, "Data Not Found", "Data not Found in the DataBase!");
+                return;
+            }
+
+            InputStream reportStream = getClass().getResourceAsStream("/reports/inventory-report.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
+
+            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(all);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+
+            JasperViewer.viewReport(jasperPrint, false); // 'false' means the app doesn't exit on close
+
+            // Optionally, export to PDF
+            // String pdfPath = "reports/UserDirectory.pdf";
+            // JasperExportManager.exportReportToPdfFile(jasperPrint, pdfPath);
+            // System.out.println("Report saved to " + pdfPath);
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean update(ItemDTO itemDTO) throws SQLException {
+        return itemRepository.update(modelMapper.map(itemDTO, ItemDAO.class));
     }
 }

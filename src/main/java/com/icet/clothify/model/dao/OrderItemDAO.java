@@ -1,9 +1,7 @@
 package com.icet.clothify.model.dao;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "Order_Items")
@@ -18,6 +16,8 @@ public class OrderItemDAO {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude // Also good practice to exclude this from equals/hashCode
     private OrderDAO order;
 
     private Integer itemId;

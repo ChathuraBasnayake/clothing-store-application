@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import java.lang.String?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" spacing="15.0" style="-fx-background-color: transparent;"
-      xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.icet.clothify.controller.MakeOrderController">
+      xmlns="http://javafx.com/javafx/21" fx:controller="com.icet.clothify.controller.MakeOrderController">
     <padding>
         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
     </padding>
@@ -74,6 +76,7 @@
                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
                             </rowConstraints>
                             <children>
                                 <VBox>
@@ -88,7 +91,16 @@
                                         <Label text="Payment Method" textFill="#4a4a4a"/>
                                         <ComboBox fx:id="orderPaymentMethodComboBox" prefHeight="26.0"
                                                   prefWidth="350.0" promptText="Select Method"
-                                                  styleClass="form-field"/>
+                                                  styleClass="form-field">
+                                            <!-- === FIX APPLIED HERE === -->
+                                            <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="Cash"/>
+                                                    <String fx:value="Card"/>
+                                                    <String fx:value="Online"/>
+                                                </FXCollections>
+                                            </items>
+                                        </ComboBox>
                                     </children>
                                 </VBox>
                                 <VBox GridPane.rowIndex="2">
@@ -96,6 +108,13 @@
                                         <Label text="Processing Employee" textFill="#4a4a4a"/>
                                         <ComboBox fx:id="orderEmployeeComboBox" prefHeight="26.0" prefWidth="350.0"
                                                   promptText="Select Employee" styleClass="form-field"/>
+                                    </children>
+                                </VBox>
+                                <VBox GridPane.rowIndex="3">
+                                    <children>
+                                        <Label text="Customer Email" textFill="#4a4a4a"/>
+                                        <TextField fx:id="customerEmailField" promptText="Enter customer's email"
+                                                   styleClass="form-field"/>
                                     </children>
                                 </VBox>
                             </children>

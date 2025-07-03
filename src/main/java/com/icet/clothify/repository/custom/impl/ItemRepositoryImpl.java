@@ -37,7 +37,15 @@ public class ItemRepositoryImpl implements ItemRepository {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
             transaction = session.beginTransaction();
-            session.remove(session.byId(id));
+            //noinspection removal
+            ItemDAO itemDAO = session.get(ItemDAO.class, id);// load entity
+
+            if (itemDAO != null) {
+                session.remove(itemDAO); // remove the entity
+            } else {
+                System.out.println("No item found with ID: " + id);
+                return false;
+            }
             transaction.commit();
             return true;
         } catch (HibernateException e) {
@@ -97,5 +105,4 @@ public class ItemRepositoryImpl implements ItemRepository {
             throw e;
         }
     }
-
 }
