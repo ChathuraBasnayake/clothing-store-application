@@ -45,7 +45,7 @@ public class ReportsController {
     private ToggleButton monthlyToggle;
     @FXML
     private ToggleButton annualToggle;
-    //</editor-fold>
+
     @FXML
     private DatePicker dailyDatePicker;
     @FXML
@@ -89,7 +89,6 @@ public class ReportsController {
         }
 
         System.out.println("Generating " + reportType + " report using JasperReports...");
-        // Example: JasperReportUtil.generateReport(reportType);
     }
 
     @FXML
@@ -98,16 +97,12 @@ public class ReportsController {
         if (selectedToggle == null) return;
 
         System.out.println("Generating analytics for: " + selectedToggle.getText());
-        // In a real application, you would fetch data from your service layer here
-        // based on the selected timeframe and date picker value.
-        loadDummyChartData(); // For now, just reload dummy data
+
+        loadDummyChartData();
     }
 
-    /**
-     * Loads placeholder data into the charts for demonstration purposes.
-     */
     private void loadDummyChartData() {
-        // Dummy data for Line Chart
+
         salesLineChart.getData().clear();
         XYChart.Series<String, Number> lineSeries = new XYChart.Series<>();
         lineSeries.setName("Monthly Sales");

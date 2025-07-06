@@ -5,6 +5,7 @@ import com.icet.clothify.model.dto.ItemDTO;
 import com.icet.clothify.model.dto.SupplierDTO;
 import com.icet.clothify.service.custom.ItemService;
 import com.icet.clothify.service.custom.SupplierService;
+import io.github.cdimascio.dotenv.Dotenv;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -27,7 +28,8 @@ import static com.icet.clothify.util.AlertUtil.alert;
 
 public class InventoryManagementController {
 
-    private static final String GEMINI_API_KEY = "AIzaSyAsG0NX0sjiLxOJGpF8vF96yp7IfhPx47E";
+    private static final Dotenv dotenv = Dotenv.load();
+    private static final String GEMINI_API_KEY = dotenv.get("GEMINI_API_KEY");
 
     @FXML
     private TextField itemNameField;
@@ -68,7 +70,7 @@ public class InventoryManagementController {
     private ComboBox<SupplierDTO> updateSupplierComboBox;
     @FXML
     private ComboBox<ItemDTO> deleteItemComboBox;
-    //endregion
+
     @Inject
     private ItemService itemService;
     @Inject

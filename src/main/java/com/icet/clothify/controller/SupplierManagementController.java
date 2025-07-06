@@ -31,7 +31,6 @@ public class SupplierManagementController {
     @FXML
     private TextField supplierPhoneField;
 
-    // FXML fields from the "Update Supplier" Tab
     @FXML
     private ComboBox<SupplierDTO> updateSupplierComboBox;
     @FXML
@@ -43,7 +42,6 @@ public class SupplierManagementController {
     @FXML
     private TextField updateSupplierPhoneField;
 
-    // FXML fields from the "Delete Supplier" Tab
     @FXML
     private ComboBox<SupplierDTO> deleteSupplierComboBox;
 

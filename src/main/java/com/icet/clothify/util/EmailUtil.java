@@ -1,6 +1,7 @@
 package com.icet.clothify.util;
 
 import com.icet.clothify.controller.MakeOrderController;
+import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
@@ -15,11 +16,10 @@ import java.util.Properties;
 
 public class EmailUtil {
 
+    private static final Dotenv dotenv = Dotenv.load();
+    private static final String SENDER_EMAIL = dotenv.get("SENDER_EMAIL");
+    private static final String SENDER_PASSWORD = dotenv.get("SENDER_PASSWORD");
 
-    private static final String SENDER_EMAIL = "chathurabasnayake2007@gmail.com";
-    private static final String SENDER_PASSWORD = "oqnl mfkr wotl ondt"; // Remember this is an App Password
-
-    // This method now creates and returns a Task
     public static Task<Void> createSendEmailTask(String recipientEmail, String subject, String body) {
         return new Task<>() {
             @Override
@@ -61,10 +61,8 @@ public class EmailUtil {
         StringBuilder sb = new StringBuilder();
         double grandTotal = 0.0;
 
-        // Use NumberFormat for currency styling
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("en", "LK")); // For LKR currency
 
-        // --- Start of HTML Body ---
         sb.append("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
         sb.append("<style>");
         sb.append("body {font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;}");
@@ -83,31 +81,28 @@ public class EmailUtil {
         sb.append(".footer a {color: #4A90E2; text-decoration: none;}");
         sb.append("</style></head><body>");
 
-        // --- Container ---
+
         sb.append("<div class=\"container\">");
 
-        // --- Header ---
+
         sb.append("<div class=\"header\"><h1>Clothify</h1></div>");
 
-        // --- Content ---
         sb.append("<div class=\"content\">");
         sb.append("<h2>Thank You For Your Order!</h2>");
         sb.append("<p>Hello,</p><p>We've received your order and it is now being processed. Here are the details:</p>");
 
-        // --- Order Summary Table ---
+
         sb.append("<table class=\"order-summary\">");
         sb.append("<tr><td><strong>Order ID:</strong></td><td class=\"text-right\">").append(orderId).append("</td></tr>");
         sb.append("<tr><td><strong>Order Date:</strong></td><td class=\"text-right\">").append(LocalDate.now().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"))).append("</td></tr>");
         sb.append("<tr><td><strong>Email:</strong></td><td class=\"text-right\">").append(customerEmail).append("</td></tr>");
         sb.append("</table>");
 
-        // --- Items Table ---
         sb.append("<h3>Order Details</h3>");
         sb.append("<table class=\"items-table\">");
         sb.append("<thead><tr><th>Item</th><th>Quantity</th><th class=\"text-right\">Unit Price</th><th class=\"text-right\">Total</th></tr></thead>");
         sb.append("<tbody>");
 
-        // Loop through order items and add them to the table
         for (MakeOrderController.OrderItem item : items) {
             sb.append("<tr>");
             sb.append("<td>").append(item.getName()).append("</td>");
@@ -120,14 +115,14 @@ public class EmailUtil {
 
         sb.append("</tbody>");
         sb.append("<tfoot>");
-        // --- Grand Total Row ---
+
         sb.append("<tr class=\"total-row\"><td colspan=\"3\">GRAND TOTAL</td><td class=\"text-right\">").append(currencyFormatter.format(grandTotal)).append("</td></tr>");
         sb.append("</tfoot></table>");
 
         sb.append("<p>Thank you for shopping with us. We hope to see you again soon!</p>");
         sb.append("</div>");
 
-        // --- Footer ---
+
         sb.append("<div class=\"footer\">");
         sb.append("<p>&copy; ").append(LocalDate.now().getYear()).append(" Clothify Inc. All Rights Reserved.</p>");
         sb.append("<p>123 Fashion Ave, Colombo, Sri Lanka</p>");

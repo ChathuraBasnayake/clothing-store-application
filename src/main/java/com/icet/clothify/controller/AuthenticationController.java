@@ -83,7 +83,6 @@ public class AuthenticationController {
 
     @FXML
     void loginOnAction(ActionEvent event) {
-        System.out.println("hello");
         try {
             if (userService.userVerifier(loginEmail.getText(), loginPassword.getText())) {
                 if (Boolean.TRUE.equals(navigateToSignUp)) {

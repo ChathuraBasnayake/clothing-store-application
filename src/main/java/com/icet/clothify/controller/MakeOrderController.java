@@ -71,15 +71,13 @@ public class MakeOrderController {
 
     @FXML
     public void initialize() {
-        // === FIX APPLIED HERE ===
-        // This setup tells the TableView how to populate its columns from the OrderItem class.
+
         colItemName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colItemQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colItemPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colItemTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
 
-        // Set the items for the table. The table will now automatically update
-        // whenever the currentOrderItems list changes.
+
         orderItemsTableView.setItems(currentOrderItems);
 
         initializeData();
@@ -119,14 +117,13 @@ public class MakeOrderController {
         for (OrderItem item : currentOrderItems) {
             if (item.getItemId() == selectedItem.getId()) {
                 item.setQty(item.getQty() + quantity);
-                orderItemsTableView.refresh(); // Refresh table to show updated total
+                orderItemsTableView.refresh();
                 orderService.updateOrderTotal(currentOrderItems, orderTotalLabel);
                 return;
             }
         }
 
         currentOrderItems.add(new OrderItem(selectedItem.getId(), selectedItem.getName(), quantity, selectedItem.getPrice()));
-        // No need to call updateOrderTotal here if it's handled by a listener, but keeping it is safe.
         orderService.updateOrderTotal(currentOrderItems, orderTotalLabel);
     }
 
@@ -202,7 +199,6 @@ public class MakeOrderController {
 
 
     private void setupItemComboBox() throws SQLException {
-        // 1. Fetch the master list of all available items (quantity > 0)
         allItemsList = itemService.getAll().stream()
                 .filter(itemDTO -> itemDTO.getQuantity() > 0)
                 .toList();
@@ -292,6 +288,9 @@ public class MakeOrderController {
     }
 
     public void handleProcessReturn(ActionEvent actionEvent) {
+    }
+
+    public void handleReturnSearch(ActionEvent actionEvent) {
     }
 
 

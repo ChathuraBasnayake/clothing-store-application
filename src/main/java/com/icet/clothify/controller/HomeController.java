@@ -52,14 +52,10 @@ public class HomeController {
 
     @FXML
     public void initialize() {
-        // Load data when the view is first created
         refreshData();
     }
 
-    /**
-     * This public method is called by the main DashboardController to update
-     * the view whenever it is shown.
-     */
+
     public void refreshData() {
         if (orderService == null || userService == null || itemService == null) {
             return;
@@ -70,9 +66,6 @@ public class HomeController {
         loadRecentActivity();
     }
 
-    /**
-     * Fetches data for the top statistic cards.
-     */
     private void loadStatCards() {
         try {
             noUsersLabel.setText(String.valueOf(userService.getAll().size()));
@@ -86,10 +79,6 @@ public class HomeController {
         }
     }
 
-    /**
-     * Fetches and displays data for the monthly sales Bar Chart, correctly
-     * setting the categories on the injected xAxis.
-     */
     private void loadSalesBarChart() {
         try {
             Map<String, Double> monthlySales = orderService.getMonthlySales(3);
@@ -121,9 +110,6 @@ public class HomeController {
         }
     }
 
-    /**
-     * Fetches and displays a list of recent activities.
-     */
     private void loadRecentActivity() {
         try {
             List<String> activities = new ArrayList<>();

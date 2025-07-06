@@ -35,7 +35,6 @@ public class UserManagementController {
     @FXML
     private JFXCheckBox isEmployeeCheckBox;
 
-    // --- FXML Fields for "Update User" Tab ---
     @FXML
     private ComboBox<UserDTO> updateUserComboBox;
     @FXML
@@ -49,7 +48,7 @@ public class UserManagementController {
     @FXML
     private JFXCheckBox updateIsEmployeeCheckBox;
 
-    // --- FXML Fields for "Delete User" Tab ---
+
     @FXML
     private ComboBox<UserDTO> deleteUserComboBox;
 
