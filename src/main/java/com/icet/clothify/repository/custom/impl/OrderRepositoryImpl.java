@@ -1,7 +1,9 @@
 package com.icet.clothify.repository.custom.impl;
 
 import com.icet.clothify.hibernateUtil.HibernateUtil;
+import com.icet.clothify.model.dao.ItemDAO;
 import com.icet.clothify.model.dao.OrderDAO;
+import com.icet.clothify.model.dao.OrderItemDAO;
 import com.icet.clothify.repository.custom.OrderRepository;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -30,9 +32,31 @@ public class OrderRepositoryImpl implements OrderRepository {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
             transaction = session.beginTransaction();
-            session.merge(dao);
+
+            for (OrderItemDAO orderItem : dao.getOrderItems()) {
+                @SuppressWarnings("removal") ItemDAO itemToUpdate = session.get(ItemDAO.class, orderItem.getItemId());
+
+                if (itemToUpdate == null) {
+                    throw new IllegalStateException("Item with ID " + orderItem.getItemId() + " not found.");
+                }
+
+                int currentStock = itemToUpdate.getQuantity();
+                int orderedQty = orderItem.getQty();
+
+                if (currentStock < orderedQty) {
+                    throw new IllegalStateException("Not enough stock for item: " + itemToUpdate.getName() +
+                            ". Requested: " + orderedQty + ", Available: " + currentStock);
+                }
+
+                itemToUpdate.setQuantity(currentStock - orderedQty);
+                session.merge(itemToUpdate);
+            }
+
+            session.persist(dao);
+
             transaction.commit();
             return true;
+
         } catch (Exception e) {
             if (transaction != null) {
                 try {
@@ -46,9 +70,9 @@ public class OrderRepositoryImpl implements OrderRepository {
         }
     }
 
+
     @Override
     public boolean update(OrderDAO dao) {
-
         return false;
     }
 
@@ -75,13 +99,9 @@ public class OrderRepositoryImpl implements OrderRepository {
             }
             throw new SQLException("Could not retrieve all orders from the database.", e);
         }
-      }
+    }
 
 
-    /**
-     * UPDATED METHOD
-     * Retrieves sales data grouped by category using the getCurrentSession() pattern.
-     */
     @Override
     public Map<String, Double> getSalesByCategory() throws SQLException {
         Session session;
@@ -90,7 +110,7 @@ public class OrderRepositoryImpl implements OrderRepository {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             tx = session.beginTransaction();
 
-           String hql = "SELECT i.category, SUM(oi.total) " +
+            String hql = "SELECT i.category, SUM(oi.total) " +
                     "FROM OrderItemDAO oi JOIN ItemDAO i ON oi.itemId = i.id " +
                     "GROUP BY i.category";
 
@@ -124,7 +144,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
             LocalDateTime startDate = LocalDateTime.now().minusMonths(monthLimit - 1).withDayOfMonth(1);
 
-           String hql = "SELECT YEAR(o.orderDate), MONTH(o.orderDate), SUM(o.total) " +
+            String hql = "SELECT YEAR(o.orderDate), MONTH(o.orderDate), SUM(o.total) " +
                     "FROM OrderDAO o " +
                     "WHERE o.orderDate >= :startDate " +
                     "GROUP BY YEAR(o.orderDate), MONTH(o.orderDate) " +
@@ -190,5 +210,4 @@ public class OrderRepositoryImpl implements OrderRepository {
             throw new SQLException("Could not retrieve recent orders.", e);
         }
     }
-
 }
