@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
 
         if (orderDAO.getOrderItems() != null) {
             for (OrderItemDAO item : orderDAO.getOrderItems()) {
-                item.setOrder(orderDAO); // important for Hibernate
+                item.setOrder(orderDAO);
                 item.setId(null);
             }
         }
@@ -68,7 +68,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public String generateOrderId() {
-        // ORD-20250619143055
+
         return "ORD-" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
     }
 

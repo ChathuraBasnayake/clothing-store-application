@@ -111,12 +111,7 @@ public class ItemServiceImpl implements ItemService {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
-            JasperViewer.viewReport(jasperPrint, false); // 'false' means the app doesn't exit on close
-
-            // Optionally, export to PDF
-            // String pdfPath = "reports/UserDirectory.pdf";
-            // JasperExportManager.exportReportToPdfFile(jasperPrint, pdfPath);
-            // System.out.println("Report saved to " + pdfPath);
+            JasperViewer.viewReport(jasperPrint, false);
 
         } catch (JRException e) {
             e.printStackTrace();

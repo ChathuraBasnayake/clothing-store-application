@@ -85,7 +85,6 @@ public class InventoryManagementController {
     public void initializeData() {
         itemCategoryComboBox.setItems(FXCollections.observableArrayList("Male", "Female", "Kids", "Unisex"));
         itemSizeComboBox.setItems(FXCollections.observableArrayList("Small", "Medium", "Large", "XL", "XXL"));
-//        descriptionErrorLabel.setVisible(false);
         descriptionErrorLabel.setText("Fill in Name, Category, Size, and Price first.");
         reloadSuppliers();
         clearFields();

@@ -95,12 +95,8 @@ public class SupplierServiceImpl implements SupplierService {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
-            JasperViewer.viewReport(jasperPrint, false); // 'false' means the app doesn't exit on close
+            JasperViewer.viewReport(jasperPrint, false);
 
-            // Optionally, export to PDF
-            // String pdfPath = "reports/UserDirectory.pdf";
-            // JasperExportManager.exportReportToPdfFile(jasperPrint, pdfPath);
-            // System.out.println("Report saved to " + pdfPath);
 
         } catch (JRException e) {
             e.printStackTrace();

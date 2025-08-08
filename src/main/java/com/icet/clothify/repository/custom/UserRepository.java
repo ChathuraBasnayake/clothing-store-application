@@ -7,4 +7,6 @@ import java.sql.SQLException;
 
 public interface UserRepository extends CRUDRepository<UserDAO, String> {
     UserDAO searchByEmail(String name) throws SQLException;
+    boolean updatePassword(String email, String newPassword) throws SQLException;
+
 }

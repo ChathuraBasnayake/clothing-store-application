@@ -38,11 +38,11 @@ public class SupplierRepositoryImpl implements SupplierRepository {
         try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
             transaction = session.beginTransaction();
 
-            //noinspection removal
-            SupplierDAO supplier = session.get(SupplierDAO.class, id); // load entity
+
+            @SuppressWarnings("removal") SupplierDAO supplier = session.get(SupplierDAO.class, id);
 
             if (supplier != null) {
-                session.remove(supplier); // remove the entity
+                session.remove(supplier);
             } else {
                 System.out.println("No supplier found with ID: " + id);
                 return false;

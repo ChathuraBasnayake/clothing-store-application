@@ -38,10 +38,10 @@ public class ItemRepositoryImpl implements ItemRepository {
         try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
             transaction = session.beginTransaction();
             //noinspection removal
-            ItemDAO itemDAO = session.get(ItemDAO.class, id);// load entity
+            ItemDAO itemDAO = session.get(ItemDAO.class, id);
 
             if (itemDAO != null) {
-                session.remove(itemDAO); // remove the entity
+                session.remove(itemDAO);
             } else {
                 System.out.println("No item found with ID: " + id);
                 return false;

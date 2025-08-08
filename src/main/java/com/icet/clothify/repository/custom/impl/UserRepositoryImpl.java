@@ -3,6 +3,7 @@ package com.icet.clothify.repository.custom.impl;
 import com.icet.clothify.hibernateUtil.HibernateUtil;
 import com.icet.clothify.model.dao.UserDAO;
 import com.icet.clothify.repository.custom.UserRepository;
+import jakarta.persistence.Query;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -97,7 +98,7 @@ public class UserRepositoryImpl implements UserRepository {
         try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
             transaction = session.beginTransaction();
             //noinspection removal
-            UserDAO userDAO = session.get(UserDAO.class, id); // correct
+            UserDAO userDAO = session.get(UserDAO.class, id);
             transaction.commit();
             return userDAO;
         } catch (HibernateException e) {
@@ -122,6 +123,27 @@ public class UserRepositoryImpl implements UserRepository {
         } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
             throw e;
+        }
+    }
+
+    @Override
+    public boolean updatePassword(String email, String newPassword) throws SQLException {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
+            transaction = session.beginTransaction();
+            String hql = "UPDATE UserDAO SET password = :newPassword WHERE email = :email";
+            Query query = session.createQuery(hql);
+            query.setParameter("newPassword", newPassword);
+            query.setParameter("email", email);
+            int result = query.executeUpdate();
+            transaction.commit();
+            return result > 0;
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
         }
     }
 }

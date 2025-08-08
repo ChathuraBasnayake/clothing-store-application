@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- The root AnchorPane allows elements to be anchored to the window edges, making it responsive. -->
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -14,17 +13,14 @@
             style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21"
             fx:controller="com.icet.clothify.controller.UserManagementController">
     <children>
-        <!-- HBox splits the view into two resizable panels, each taking half the space. -->
         <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <!-- The VBox containing the forms will grow horizontally. -->
                 <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                     <children>
                         <TabPane style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE"
                                  VBox.vgrow="ALWAYS">
                             <tabs>
-                                <!-- Tab 1: Add User -->
                                 <Tab text="Add User">
                                     <content>
                                         <AnchorPane style="-fx-background-color: #ffffff;">
@@ -138,7 +134,6 @@
                                         </AnchorPane>
                                     </content>
                                 </Tab>
-                                <!-- Tab 2: Update User -->
                                 <Tab text="Update User">
                                     <content>
                                         <AnchorPane style="-fx-background-color: #ffffff;">
@@ -236,7 +231,6 @@
                                         </AnchorPane>
                                     </content>
                                 </Tab>
-                                <!-- Tab 3: Delete User -->
                                 <Tab text="Delete User">
                                     <content>
                                         <AnchorPane style="-fx-background-color: #ffffff;">
@@ -307,7 +301,6 @@
                         </TabPane>
                     </children>
                 </VBox>
-                <!-- The image container will also grow to take up half the space. -->
                 <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                     <children>
                         <Label text="User Management" textFill="#333333">

@@ -64,8 +64,6 @@ public class OrderRepositoryImpl implements OrderRepository {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             tx = session.beginTransaction();
-            // FIX: Re-introduced 'LEFT JOIN FETCH' to solve LazyInitializationException.
-            // The 'DISTINCT' keyword prevents duplicate Order results.
             String hql = "SELECT DISTINCT o FROM OrderDAO o LEFT JOIN FETCH o.orderItems";
             Query<OrderDAO> query = session.createQuery(hql, OrderDAO.class);
             List<OrderDAO> orders = query.list();
@@ -77,9 +75,7 @@ public class OrderRepositoryImpl implements OrderRepository {
             }
             throw new SQLException("Could not retrieve all orders from the database.", e);
         }
-        // NOTE: A session retrieved via getCurrentSession() is automatically closed
-        // when the transaction is committed or rolled back. No 'finally' block is needed.
-    }
+      }
 
 
     /**
@@ -94,8 +90,7 @@ public class OrderRepositoryImpl implements OrderRepository {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             tx = session.beginTransaction();
 
-            // This HQL query joins OrderItemDAO with an assumed ItemDAO entity.
-            String hql = "SELECT i.category, SUM(oi.total) " +
+           String hql = "SELECT i.category, SUM(oi.total) " +
                     "FROM OrderItemDAO oi JOIN ItemDAO i ON oi.itemId = i.id " +
                     "GROUP BY i.category";
 
@@ -127,11 +122,9 @@ public class OrderRepositoryImpl implements OrderRepository {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             tx = session.beginTransaction();
 
-            // 1. Calculate the start date for the query.
             LocalDateTime startDate = LocalDateTime.now().minusMonths(monthLimit - 1).withDayOfMonth(1);
 
-            // 2. Write the HQL query to get sales data.
-            String hql = "SELECT YEAR(o.orderDate), MONTH(o.orderDate), SUM(o.total) " +
+           String hql = "SELECT YEAR(o.orderDate), MONTH(o.orderDate), SUM(o.total) " +
                     "FROM OrderDAO o " +
                     "WHERE o.orderDate >= :startDate " +
                     "GROUP BY YEAR(o.orderDate), MONTH(o.orderDate) " +
@@ -143,26 +136,21 @@ public class OrderRepositoryImpl implements OrderRepository {
             List<Object[]> results = query.list();
             tx.commit();
 
-            // 3. Create a map of sales results for easy lookup.
             Map<LocalDate, Double> salesDataMap = results.stream()
                     .collect(Collectors.toMap(
-                            result -> LocalDate.of((Integer) result[0], (Integer) result[1], 1), // Key: First day of the month
-                            result -> (Double) result[2]  // Value: Total sales
+                            result -> LocalDate.of((Integer) result[0], (Integer) result[1], 1),
+                            result -> (Double) result[2]
                     ));
 
-            // 4. Generate a complete list of months for the specified range.
-            // This ensures months with zero sales are included in the final result.
             Map<String, Double> finalMonthlySales = new LinkedHashMap<>();
             LocalDate today = LocalDate.now();
 
             IntStream.range(0, monthLimit)
-                    .mapToObj(i -> today.minusMonths(i).withDayOfMonth(1)) // Get the first day of each month in the range
-                    .sorted() // Sort the dates chronologically
+                    .mapToObj(i -> today.minusMonths(i).withDayOfMonth(1))
+                    .sorted()
                     .forEach(monthStartDate -> {
-                        // Get the sales total for this month from the map, or 0.0 if no sales.
                         Double total = salesDataMap.getOrDefault(monthStartDate, 0.0);
 
-                        // Format the month name to full text (e.g., "July")
                         String monthName = monthStartDate.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
                         String key = monthName + " '" + String.valueOf(monthStartDate.getYear()).substring(2);
 
@@ -172,11 +160,9 @@ public class OrderRepositoryImpl implements OrderRepository {
             return finalMonthlySales;
 
         } catch (Exception e) {
-            // If any error occurs, roll back the transaction to prevent an inconsistent state.
             if (tx != null && tx.isActive()) {
                 tx.rollback();
             }
-            // Wrap the original exception in an SQLException to notify the service layer.
             throw new SQLException("Could not retrieve monthly sales data.", e);
         }
     }
@@ -192,7 +178,7 @@ public class OrderRepositoryImpl implements OrderRepository {
             String hql = "SELECT DISTINCT o FROM OrderDAO o LEFT JOIN FETCH o.orderItems ORDER BY o.orderDate DESC";
 
             Query<OrderDAO> query = session.createQuery(hql, OrderDAO.class);
-            query.setMaxResults(limit); // Limit the result set to the specified number
+            query.setMaxResults(limit);
 
             List<OrderDAO> recentOrders = query.list();
             tx.commit();

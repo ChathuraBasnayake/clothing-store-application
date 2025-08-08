@@ -12,12 +12,12 @@ public class OrderItemDAO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Primary key for this table
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     @ToString.Exclude
-    @EqualsAndHashCode.Exclude // Also good practice to exclude this from equals/hashCode
+    @EqualsAndHashCode.Exclude
     private OrderDAO order;
 
     private Integer itemId;

@@ -101,7 +101,6 @@ public class UserManagementController {
     }
 
     private String generateUserId() {
-        // USER-20250619143055
         return "USER-" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
     }
 

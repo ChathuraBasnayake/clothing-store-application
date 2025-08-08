@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- The root AnchorPane makes the entire view responsive -->
+
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
@@ -11,16 +11,16 @@
             style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21"
             fx:controller="com.icet.clothify.controller.SupplierManagementController">
     <children>
-        <!-- The TabPane is anchored to fill the entire window -->
+
         <TabPane tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
-                <!-- Tab 1: Add Supplier -->
+
                 <Tab text="Add Supplier">
                     <content>
                         <AnchorPane>
                             <children>
-                                <!-- This VBox now contains the shadow effect and is anchored to its parent -->
+
                                 <VBox alignment="TOP_CENTER" spacing="20.0"
                                       style="-fx-background-color: white; -fx-background-radius: 10;"
                                       AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
@@ -42,7 +42,7 @@
                                                 <Insets top="10.0"/>
                                             </VBox.margin>
                                         </Label>
-                                        <!-- Form fields are in HBoxes, and their parent VBoxes are set to grow -->
+
                                         <HBox spacing="30.0">
                                             <children>
                                                 <VBox spacing="5.0" HBox.hgrow="ALWAYS">
@@ -99,7 +99,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <!-- Tab 2: Update Supplier -->
+
                 <Tab text="Update Supplier">
                     <content>
                         <AnchorPane>
@@ -192,7 +192,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <!-- Tab 3: Delete Supplier -->
+
                 <Tab text="Delete Supplier">
                     <content>
                         <AnchorPane>

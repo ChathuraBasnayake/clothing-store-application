@@ -24,7 +24,6 @@
                     </font>
                 </Label>
 
-                <!-- Standard Printable Reports Section -->
                 <TitledPane animated="false" text="Standard Reports" collapsible="false">
                     <font>
                         <Font name="System Bold" size="14.0"/>
@@ -62,7 +61,6 @@
                     </content>
                 </TitledPane>
 
-                <!-- Sales Analytics Section -->
                 <TitledPane animated="false" text="Sales Analytics (Admin)" collapsible="false">
                     <font>
                         <Font name="System Bold" size="14.0"/>
@@ -82,12 +80,10 @@
                                             </font>
                                         </Label>
 
-                                        <!-- FIX: Define the ToggleGroup here, but don't place it in the layout -->
                                         <fx:define>
                                             <ToggleGroup fx:id="timeframeToggleGroup"/>
                                         </fx:define>
 
-                                        <!-- FIX: Assign each ToggleButton to the group -->
                                         <ToggleButton fx:id="dailyToggle" text="Daily" selected="true"
                                                       toggleGroup="$timeframeToggleGroup"/>
                                         <ToggleButton fx:id="monthlyToggle" text="Monthly"

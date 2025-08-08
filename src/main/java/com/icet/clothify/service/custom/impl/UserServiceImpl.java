@@ -72,13 +72,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO searchByEmail(String name) throws SQLException {
-        UserDAO userDAO = userRepository.searchByEmail(name);
+    public UserDTO searchByEmail(String email) throws SQLException {
+        UserDAO userDAO = userRepository.searchByEmail(email);
         if (userDAO == null) {
             return null;
         }
         return modelMapper.map(userDAO, UserDTO.class);
     }
+
+
+    @Override
+    public boolean userExists(String email) throws SQLException {
+        return userRepository.searchByEmail(email) != null;
+    }
+
+    @Override
+    public boolean updatePassword(String email, String newPassword) throws SQLException {
+        return userRepository.updatePassword(email, newPassword);
+    }
+
 
     public void generateAndShowUsersReport() throws SQLException {
         try {
@@ -98,16 +110,10 @@ public class UserServiceImpl implements UserService {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
-            JasperViewer.viewReport(jasperPrint, false); // 'false' means the app doesn't exit on close
-
-            // Optionally, export to PDF
-            // String pdfPath = "reports/UserDirectory.pdf";
-            // JasperExportManager.exportReportToPdfFile(jasperPrint, pdfPath);
-            // System.out.println("Report saved to " + pdfPath);
+            JasperViewer.viewReport(jasperPrint, false);
 
         } catch (JRException e) {
             e.printStackTrace();
         }
     }
 }
-

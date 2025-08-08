@@ -28,7 +28,7 @@ import static com.icet.clothify.util.AlertUtil.alert;
 
 public class HomeController {
 
-    //<editor-fold desc="FXML Fields">
+
     @FXML
     private Label totalSalesLabel;
     @FXML
@@ -40,8 +40,7 @@ public class HomeController {
     @FXML
     private ListView<String> activityListView;
     @FXML
-    private CategoryAxis xAxis; // The FXML variable for the BarChart's X-Axis
-    //</editor-fold>
+    private CategoryAxis xAxis;
 
     @Inject
     private ItemService itemService;
